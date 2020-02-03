@@ -5,10 +5,12 @@ const SignUpForm = () => {
     const { register, handleSubmit, errors, watch } = useForm();
     const password = useRef({});
     password.current = watch("password", "");
+
+    //TODO: Send this data (object) somewhere
     const onSubmit = data => {
         console.log("SignUp data", data)
     };
-
+    //TODO: Add Links and routing to "Login"
     return (
         <div className="signup-form-container">
             <h2>Create an Account</h2>
@@ -18,6 +20,7 @@ const SignUpForm = () => {
                     <input
                         type="email"
                         name="email"
+                        placeholder="I<3food@email.com"
                         ref={register({
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i
@@ -30,6 +33,7 @@ const SignUpForm = () => {
                     <input
                         type="text"
                         name="username"
+                        placeholder="FoodChampion2"
                         ref={register({
                             required: "Name is required",
                             maxLength: {
@@ -46,6 +50,7 @@ const SignUpForm = () => {
                     <input
                         type="password"
                         name="password"
+                        placeholder="********"
                         ref={register({
                             required: "Password is required",
                             minLength: {
@@ -61,6 +66,7 @@ const SignUpForm = () => {
                     <input
                         type="password"
                         name="password_confirm"
+                        placeholder="********"
                         ref={register({
                             validate: value =>
                                 value === password.current || "Passwords must be the same"
@@ -73,6 +79,7 @@ const SignUpForm = () => {
                     <input
                         type="text"
                         name="location"
+                        placeholder="Boston"
                         ref={register({
                             required: "Location is required"
                         })}
