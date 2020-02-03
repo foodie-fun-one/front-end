@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
     const { register, handleSubmit, errors, watch } = useForm();
@@ -10,7 +11,6 @@ const SignUpForm = () => {
     const onSubmit = data => {
         console.log("SignUp data", data)
     };
-    //TODO: Add Links and routing to "Login"
     return (
         <div className="signup-form-container">
             <h2>Create an Account</h2>
@@ -92,7 +92,7 @@ const SignUpForm = () => {
             </form>
             <div className="redirect-form">
                 <p>Already have an account?</p>
-                <p>Login</p>
+                <Link className="redirect-login" to="/login">Login</Link>
             </div>
         </div>
     )
