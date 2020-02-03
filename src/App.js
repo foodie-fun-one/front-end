@@ -22,14 +22,15 @@ import { Reviews } from './components/Reviews/Reviews'
 import './App.css';
 
 const Wrapper = styled.div`
-
+  width: 100%;
+  height: 100vh;
 `
 
 function App() {
   return(
     <Wrapper>
-    <Navigation />
     <Router>
+    <Navigation />
       <Route exact path="/" />
       <Route path="/login" component={Login}/>
       <Route path="/signup" component={Signup}/>
