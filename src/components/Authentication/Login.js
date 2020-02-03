@@ -10,7 +10,7 @@ const LoginForm = () => {
             <form>
                 <label>
                     <p>Email</p>
-                    <input type="email" name="email" autofocus />
+                    <input type="email" name="email" />
                 </label>
                 <label>
                     <p>Password</p>
