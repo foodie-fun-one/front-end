@@ -5,9 +5,9 @@ const LoginForm = () => {
     //* First thing the user will see
     //TODO: Add Links and routing to "Sign Up"
     return (
-        <div className="login-form">
+        <div className="login-form-container">
             <h2>Login to your Account</h2>
-            <form>
+            <form className="login-form">
                 <label>
                     <p>Email</p>
                     <input type="email" name="email" />
