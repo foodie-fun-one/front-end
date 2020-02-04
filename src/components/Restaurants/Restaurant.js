@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ReactStars from 'react-stars'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -85,10 +84,10 @@ export const Restaurant = (props) => {
       </InfoWrapper>
 
       <RatingsWrapper>
-        <Rating>Food Rating:<ReactStars count={5} value={5} edit={false} size={18} /></Rating>
+        {/* <Rating>Food Rating:<ReactStars count={5} value={5} edit={false} size={18} /></Rating>
         <Rating>Price Rating:<ReactStars count={5} value={3} edit={false} size={18} /></Rating>
         <Rating>Service Rating:<ReactStars count={5} value={1.5} edit={false} size={18} /></Rating>
-        <Rating>Overall Rating:<ReactStars count={5} value={3.5} edit={false} size={18} /></Rating>
+        <Rating>Overall Rating:<ReactStars count={5} value={3.5} edit={false} size={18} /></Rating> */}
       </RatingsWrapper>
 
       <Review>Food was great!</Review>

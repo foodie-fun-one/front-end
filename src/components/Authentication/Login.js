@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -13,10 +13,18 @@ import {
 import "./Login.css";
 
 const LoginForm = () => {
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    })
     const { register, handleSubmit, errors } = useForm();
-    const onSubmit = data => {
+
+    const onSubmit = () => {
         axios
-            .post("https://reqres.in/api/users", data)
+            .post("https://foodiefun-buildweek.herokuapp.com/api/login", {
+                username: user.username,
+                password: user.password
+            })
             .then(res => {
                 console.log("Login submitted successfully", res)
             })
@@ -24,30 +32,41 @@ const LoginForm = () => {
                 console.log("Login error occured", err)
             })
     };
+
+    const handleChange = e => {
+        setUser({
+            ...user, 
+            [e.target.name]: e.target.value,
+        })
+    }
     return (
         <Container className="login-form-container">
             <h2>Login to your Account</h2>
             <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup>
-                    <Label for="loginEmail">Email</Label>
+                    <Label htmlFor="loginEmail">Email</Label>
                     <Input
                         id="loginEmail"
                         type="email"
-                        name="email"
+                        name="username"
                         placeholder="i<3food@gmail.com"
+                        onChange={handleChange}
+                        value={user.username}
                         ref={register({
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i
                         })}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.username && <p>{errors.username.message}</p>}
                 </FormGroup>
                 <FormGroup>
-                    <Label for="loginPassword">Password</Label>
+                    <Label htmlFor="loginPassword">Password</Label>
                     <Input
                         id="loginPassword"
                         type="password"
                         name="password"
+                        onChange={handleChange}
+                        value={user.password}
                         placeholder="********"
                         ref={register({
                             required: "Password is required",
