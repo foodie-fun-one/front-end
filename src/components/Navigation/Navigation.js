@@ -43,7 +43,7 @@ export const Navigation = () => {
       <ButtonDiv>
 
       <Button>
-      <Link to="/dashboard">
+      <Link to="/explore">
       <FontAwesomeIcon icon={faUsers} color="black"/>
       <P>Dashboard</P>
       </Link>
