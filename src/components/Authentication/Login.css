@@ -1,0 +1,8 @@
+.login-form-container {
+    margin: 3rem auto;
+    background: lightgray;
+}
+
+.login-form-container h2 {
+    text-align: center;
+}
