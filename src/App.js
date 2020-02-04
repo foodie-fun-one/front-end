@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PrivateRoute } from './components/Navigation/PrivateRoute';
 
 import Login  from './components/Authentication/Login';
+
 import Signup from './components/Authentication/Signup';
 
 import { Navigation } from './components/Navigation/Navigation';
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
 `
 
 function App() {
+
   return(
     <Wrapper>
     <Router>
@@ -42,6 +44,7 @@ function App() {
       <Route path="/reviews" component={Reviews}/>
     </Router>
     </Wrapper>
-)}
+  )
+}
 
 export default App;
