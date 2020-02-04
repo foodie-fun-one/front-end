@@ -21,14 +21,13 @@ import { EditReview } from './components/Reviews/editReview';
 import { Reviews } from './components/Reviews/Reviews'
 
 import './App.css';
+import axios from 'axios'
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
 `
-
 function App() {
-
   return(
     <Wrapper>
     <Router>

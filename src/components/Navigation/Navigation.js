@@ -38,7 +38,7 @@ export const Navigation = () => {
 
   return(
     <Wrapper>
-      <Link to = "/login"><FontAwesomeIcon size="4x" color="black" icon={faHamburger}/></Link>
+      <Link to = "/explore"><FontAwesomeIcon size="4x" color="black" icon={faHamburger}/></Link>
 
       <ButtonDiv>
 

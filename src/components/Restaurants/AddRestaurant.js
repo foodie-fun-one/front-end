@@ -17,7 +17,6 @@ const FormWrappers = styled.div`
   flex-direction: column;
   width: 15%;
   margin: 1% auto;
-  
 `
 
 const Input = styled.input`
