@@ -8424,10 +8424,10 @@ react-scripts@^3.3.1:
   optionalDependencies:
     fsevents "2.1.2"
 
-react-strap@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/react-strap/-/react-strap-0.0.1.tgz#08f22c5e2a0ae7f475cd5814b89fc0c05a67215e"
-  integrity sha1-CPIsXioK5/R1zVgUuJ/AwFpnIV4=
+react-stars@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-stars/-/react-stars-2.2.5.tgz#911852018e1574a0f9a2c1dfa4f0bc9af071b921"
+  integrity sha1-kRhSAY4VdKD5osHfpPC8mvBxuSE=
 
 react@^16.6.1:
   version "16.12.0"
