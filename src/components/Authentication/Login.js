@@ -7,14 +7,14 @@ const LoginForm = () => {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
         axios
-            .post("#", data)
+            .post("https://reqres.in/api/users", data)
             .then(res => {
                 console.log("Login submitted successfully", res)
             })
             .catch(err => {
                 console.log("Login error occured", err)
             })
-    }
+    };
     return (
         <div className="login-form-container">
             <h2>Login to your Account</h2>

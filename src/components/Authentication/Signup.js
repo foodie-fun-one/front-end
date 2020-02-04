@@ -7,10 +7,9 @@ const SignUpForm = () => {
     const { register, handleSubmit, errors, watch } = useForm();
     const password = useRef({});
     password.current = watch("password", "");
-
-    const onSubmit = (data) => {
+    const onSubmit = data => {
         axios
-            .post("#", data)
+            .post("https://reqres.in/api/users", data)
             .then(res => {
                 console.log("SignUp submitted successfully", res)
             })
