@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PrivateRoute } from './components/Navigation/PrivateRoute';
 
 import Login  from './components/Authentication/Login';
+
 import Signup from './components/Authentication/Signup';
 
 import { Navigation } from './components/Navigation/Navigation';
@@ -27,9 +28,6 @@ const Wrapper = styled.div`
   height: 100vh;
 `
 function App() {
-  axios.get(`https://foodiefun-buildweek.herokuapp.com/api/restaurants`)
-  .then(res=> {console.log(res)})
-  .catch(err=> console.log(err))
   return(
     <Wrapper>
     <Router>
@@ -45,6 +43,7 @@ function App() {
       <Route path="/reviews" component={Reviews}/>
     </Router>
     </Wrapper>
-)}
+  )
+}
 
 export default App;
