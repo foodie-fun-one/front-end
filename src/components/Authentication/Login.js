@@ -2,6 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {
+    Button,
+    Container,
+    Form,
+    FormGroup,
+    Label,
+    Input
+} from "reactstrap";
+import "./Login.css";
 
 const LoginForm = () => {
     const { register, handleSubmit, errors } = useForm();
@@ -16,12 +25,13 @@ const LoginForm = () => {
             })
     };
     return (
-        <div className="login-form-container">
+        <Container className="login-form-container">
             <h2>Login to your Account</h2>
-            <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    <p>Email</p>
-                    <input
+            <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+                <FormGroup>
+                    <Label for="loginEmail">Email</Label>
+                    <Input
+                        id="loginEmail"
                         type="email"
                         name="email"
                         placeholder="i<3food@gmail.com"
@@ -31,10 +41,11 @@ const LoginForm = () => {
                         })}
                     />
                     {errors.email && <p>{errors.email.message}</p>}
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input
+                </FormGroup>
+                <FormGroup>
+                    <Label for="loginPassword">Password</Label>
+                    <Input
+                        id="loginPassword"
                         type="password"
                         name="password"
                         placeholder="********"
@@ -47,16 +58,15 @@ const LoginForm = () => {
                         })}
                     />
                     {errors.password && <p>{errors.password.message}</p>}
-                </label>
-                <button type="submit">
-                    Login
-                </button>
-            </form>
-            <div className="redirect-form">
-                <p>Need an account?</p>
-                <Link className="redirect-signup" to="/signup">Sign Up</Link>
-            </div>
-        </div>
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit">
+                        Login
+                </Button>
+                </FormGroup>
+                <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+            </Form>
+        </Container>
     )
 }
 

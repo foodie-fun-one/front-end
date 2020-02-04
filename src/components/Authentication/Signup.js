@@ -2,6 +2,17 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {
+    Button,
+    Container,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Col,
+    Row
+} from "reactstrap";
+import "./Signup.css";
 
 const SignUpForm = () => {
     const { register, handleSubmit, errors, watch } = useForm();
@@ -18,25 +29,27 @@ const SignUpForm = () => {
             })
     };
     return (
-        <div className="signup-form-container">
+        <Container className="signup-form-container" fluid="">
             <h2>Create an Account</h2>
-            <form className="signup-form" onSubmit={event => event.preventDefault()}>
-                <label>
-                    <p>Email</p>
-                    <input
+            <Form className="signup-form" onSubmit={event => event.preventDefault()}>
+                <FormGroup>
+                    <Label for="signupEmail">Email</Label>
+                    <Input
+                        id="signupEmail"
                         type="email"
                         name="email"
-                        placeholder="I<3food@email.com"
+                        placeholder="i<3food@email.com"
                         ref={register({
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i
                         })}
                     />
                     {errors.email && <p>{errors.email.message}</p>}
-                </label>
-                <label>
-                    <p>Name</p>
-                    <input
+                </FormGroup>
+                <FormGroup>
+                    <Label for="signupName">Name</Label>
+                    <Input
+                        id="signupName"
                         type="text"
                         name="username"
                         placeholder="FoodChampion2"
@@ -49,11 +62,11 @@ const SignUpForm = () => {
                         })}
                     />
                     {errors.username && <p>{errors.username.message}</p>}
-
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input
+                </FormGroup>
+                <FormGroup>
+                    <Label for="signupPassword">Password</Label>
+                    <Input
+                        id="signupPassword"
                         type="password"
                         name="password"
                         placeholder="********"
@@ -66,10 +79,11 @@ const SignUpForm = () => {
                         })}
                     />
                     {errors.password && <p>{errors.password.message}</p>}
-                </label>
-                <label>
-                    <p>Confirm Password</p>
-                    <input
+                </FormGroup>
+                <FormGroup>
+                    <Label for="signupConfirmPassword">Confirm Password</Label>
+                    <Input
+                        id="signupConfirmPassword"
                         type="password"
                         name="password_confirm"
                         placeholder="********"
@@ -79,10 +93,11 @@ const SignUpForm = () => {
                         })}
                     />
                     {errors.password_confirm && <p>{errors.password_confirm.message}</p>}
-                </label>
-                <label>
-                    <p>Location</p>
-                    <input
+                </FormGroup>
+                <FormGroup>
+                    <Label for="signupLocation">Location</Label>
+                    <Input
+                        id="signupLocation"
                         type="text"
                         name="location"
                         placeholder="Boston"
@@ -91,16 +106,15 @@ const SignUpForm = () => {
                         })}
                     />
                     {errors.location && <p>{errors.location.message}</p>}
-                </label>
-                <button type="submit" onClick={handleSubmit(onSubmit)}>
-                    Submit
-                </button>
-            </form>
-            <div className="redirect-form">
-                <p>Already have an account?</p>
-                <Link className="redirect-login" to="/login">Login</Link>
-            </div>
-        </div>
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit" onClick={handleSubmit(onSubmit)}>
+                        Create
+                        </Button>
+                </FormGroup>
+                <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>
+            </Form>
+        </Container>
     )
 }
 
