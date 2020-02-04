@@ -1,7 +1,8 @@
-import React from 'react' 
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ReactStars from 'react-stars'
 import { Link } from 'react-router-dom'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const Wrapper = styled.div`
   border: 1px solid gray;
@@ -10,6 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 `
 
 const InfoWrapper = styled.div`
@@ -20,6 +22,12 @@ const InfoWrapper = styled.div`
 const RatingsWrapper = styled.div`
   width: 20%;
   width: 190px;
+`
+
+const OptionsWrapper = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 0px;
 `
 
 const Rating = styled.div`
@@ -59,25 +67,46 @@ const Button = styled.button`
   }
 `
 
+const DotWrapper = styled.div`
+  font-size: 1.5rem;
+`
+
 export const Restaurant = (props) => {
-  return(
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
+
+  return (
     <Wrapper>
       <InfoWrapper>
-      <Title>Restaurant Name!</Title>
-      <Hours>Hours: 8:30-2:30</Hours>
-      <Address>12345 StreetName Rd. City, State</Address>
+        <Title>Restaurant Name!</Title>
+        <Hours>Hours: 8:30-2:30</Hours>
+        <Address>12345 StreetName Rd. City, State</Address>
       </InfoWrapper>
 
       <RatingsWrapper>
-      <Rating>Food Rating:<ReactStars count={5} value={5} edit={false} size={18}/></Rating>
-      <Rating>Price Rating:<ReactStars count={5} value={3} edit={false} size={18}/></Rating>
-      <Rating>Service Rating:<ReactStars count={5} value={1.5} edit={false} size={18}/></Rating>
-      <Rating>Overall Rating:<ReactStars count={5} value={3.5} edit={false} size={18}/></Rating>
+        <Rating>Food Rating:<ReactStars count={5} value={5} edit={false} size={18} /></Rating>
+        <Rating>Price Rating:<ReactStars count={5} value={3} edit={false} size={18} /></Rating>
+        <Rating>Service Rating:<ReactStars count={5} value={1.5} edit={false} size={18} /></Rating>
+        <Rating>Overall Rating:<ReactStars count={5} value={3.5} edit={false} size={18} /></Rating>
       </RatingsWrapper>
 
       <Review>Food was great!</Review>
 
       <Link to="/edit-review"><Button>Edit Review</Button></Link>
 
+      <OptionsWrapper>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle className="optionsButton" color="light" tag="button">
+        <DotWrapper>...</DotWrapper>
+        </DropdownToggle>
+      <DropdownMenu>
+      <Link to="/edit-restaurant"><DropdownItem>Edit Restaurant</DropdownItem></Link>
+        <DropdownItem>Delete Restaurant</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+      </OptionsWrapper>
+
     </Wrapper>
-)}
+  )
+}

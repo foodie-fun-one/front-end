@@ -42,3 +42,9 @@ code:before,
 code:after {
   content: '\`';
 }
+
+.optionsButton{
+  border: 0px;
+  padding: 0 5px;
+  margin: 0%;
+}

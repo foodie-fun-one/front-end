@@ -20,13 +20,16 @@ import { EditReview } from './components/Reviews/editReview';
 import { Reviews } from './components/Reviews/Reviews'
 
 import './App.css';
+import axios from 'axios'
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
 `
-
 function App() {
+  axios.get(`https://foodiefun-buildweek.herokuapp.com/api/restaurants`)
+  .then(res=> {console.log(res)})
+  .catch(err=> console.log(err))
   return(
     <Wrapper>
     <Router>
