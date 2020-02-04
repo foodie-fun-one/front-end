@@ -20,7 +20,7 @@ const ButtonDiv = styled.div`
 
 const Button = styled.button`
   width: 100px;
-  padding-top: 5%;
+  margin-top: 20%;
   border: 0px;
   color: black;
 
@@ -42,28 +42,28 @@ export const Navigation = () => {
 
       <ButtonDiv>
 
+      <Link to="/explore">
       <Button>
-      <Link to="/dashboard">
       <FontAwesomeIcon icon={faUsers} color="black"/>
       <P>Dashboard</P>
-      </Link>
       </Button>
+      </Link>
 
-      <Button onClick={() =>{setLoggedIn(!loggedIn)}}>
       <Link to="/login">
+      <Button onClick={() =>{setLoggedIn(!loggedIn)}}>
       <FontAwesomeIcon icon={faSignInAlt} color="black"/>
       {loggedIn === true ? <P>Log Out</P> :
        loggedIn === false ? <P>Log in</P> :
        null}
-       </Link>
       </Button>
+       </Link>
 
-      <Button>
         <Link to="/signup">
+      <Button>
         <FontAwesomeIcon icon={faUserPlus} color="black"/>
         <P>Sign Up</P>
-        </Link>
       </Button>
+        </Link>
 
       </ButtonDiv>
     </Wrapper>
