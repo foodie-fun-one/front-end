@@ -1,12 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
-    const { register, handleSubmit } = useForm();
-    //TODO: Send this data (object) somewhere
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
-        console.log("Login data", data)
+        axios
+            .post("#", data)
+            .then(res => {
+                console.log("Login submitted successfully", res)
+            })
+            .catch(err => {
+                console.log("Login error occured", err)
+            })
     }
     return (
         <div className="login-form-container">
@@ -18,7 +25,12 @@ const LoginForm = () => {
                         type="email"
                         name="email"
                         placeholder="i<3food@gmail.com"
-                        ref={register} />
+                        ref={register({
+                            required: "Email is required",
+                            pattern: /^\S+@\S+$/i
+                        })}
+                    />
+                    {errors.email && <p>{errors.email.message}</p>}
                 </label>
                 <label>
                     <p>Password</p>
@@ -26,7 +38,15 @@ const LoginForm = () => {
                         type="password"
                         name="password"
                         placeholder="********"
-                        ref={register} />
+                        ref={register({
+                            required: "Password is required",
+                            minLength: {
+                                value: 8,
+                                message: "Password must have at least 8 characters"
+                            }
+                        })}
+                    />
+                    {errors.password && <p>{errors.password.message}</p>}
                 </label>
                 <button type="submit">
                     Login

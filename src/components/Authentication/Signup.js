@@ -1,15 +1,22 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignUpForm = () => {
     const { register, handleSubmit, errors, watch } = useForm();
     const password = useRef({});
     password.current = watch("password", "");
 
-    //TODO: Send this data (object) somewhere
-    const onSubmit = data => {
-        console.log("SignUp data", data)
+    const onSubmit = (data) => {
+        axios
+            .post("#", data)
+            .then(res => {
+                console.log("SignUp submitted successfully", res)
+            })
+            .catch(err => {
+                console.log("SignUp error occured", err)
+            })
     };
     return (
         <div className="signup-form-container">
