@@ -3,16 +3,17 @@ import styled from 'styled-components';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// import { PrivateRoute } from './components/Navigation/PrivateRoute';
+import { PrivateRoute } from './components/Navigation/PrivateRoute';
 
-// import { Login } from './components/Authentication/Login';
-import { Signup } from './components/Authentication/Signup';
+import Login  from './components/Authentication/Login';
+import Signup from './components/Authentication/Signup';
 
 import { Navigation } from './components/Navigation/Navigation';
 
 import { AddRestaurant } from './components/Restaurants/AddRestaurant';
 import { Dashboard } from './components/Restaurants/Dashboard';
 import { EditRestaurant } from './components/Restaurants/EditRestaurant';
+import { Restaurants } from './components/Restaurants/Restaurants';
 
 import { AddReview } from './components/Reviews/AddReview';
 import { EditReview } from './components/Reviews/editReview';
@@ -26,7 +27,6 @@ const Wrapper = styled.div`
 `
 
 function App() {
-
   return(
     <Wrapper>
     <Router>

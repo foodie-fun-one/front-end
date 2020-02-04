@@ -14,6 +14,28 @@ const Form = styled.form`
 
 const FormWrappers = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 15%;
+  margin: 1% auto;
+  
+`
+
+const Input = styled.input`
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`
+
+const Button = styled.button`
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 15%;
+
+    &:hover{
+      background-color: #45a049;
+    }
 `
 
 export const AddRestaurant = () => {
@@ -31,12 +53,16 @@ export const AddRestaurant = () => {
     })
   }
 
+  const onSubmit = e => {
+    e.preventDefault();
+  }
+
   return (
     <Wrapper>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <FormWrappers>
           <label for="name">Restaurant Name: </label>
-          <input
+          <Input
             type="input"
             name="name"
             value={restaurant.name}
@@ -46,7 +72,7 @@ export const AddRestaurant = () => {
 
         <FormWrappers>
           <label for="hours">Restaurant Hours: </label>
-          <input
+          <Input
             type="input"
             name="hours"
             value={restaurant.hours}
@@ -56,12 +82,13 @@ export const AddRestaurant = () => {
 
         <FormWrappers>
           <label for="address">Restaurant Address: </label>
-          <input
+          <Input
             type="input"
             name="address"
             value={restaurant.address}
             onChange={handleChange}
           />
+          <Button>Add Restaurant</Button>
         </FormWrappers>
 
       </Form>
