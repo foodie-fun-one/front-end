@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import BeautyStars from 'beauty-stars';
 
 const Wrapper = styled.div`
   border: 1px solid gray;
@@ -11,6 +12,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   position: relative;
+  height: 50%;
 `
 
 const InfoWrapper = styled.div`
@@ -20,18 +22,22 @@ const InfoWrapper = styled.div`
 
 const RatingsWrapper = styled.div`
   width: 20%;
-  width: 190px;
+  width: 25%;
 `
 
 const OptionsWrapper = styled.div`
   position: absolute;
   right: 0px;
   top: 0px;
+  z-index: 2;
 `
 
 const Rating = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: left;
+  padding-bottom: 2%;
 `
 
 const Title = styled.div`
@@ -48,10 +54,11 @@ const Address = styled.div`
 `
 
 const Review = styled.div`
-  width: 45%;
+  height: ;
+  width: 40%;
   border: 1px solid gray;
   margin: 0%;
-  height: 12.5vh;
+  min-height: 200px;
 `
 
 const Button = styled.button`
@@ -84,10 +91,10 @@ export const Restaurant = (props) => {
       </InfoWrapper>
 
       <RatingsWrapper>
-        {/* <Rating>Food Rating:<ReactStars count={5} value={5} edit={false} size={18} /></Rating>
-        <Rating>Price Rating:<ReactStars count={5} value={3} edit={false} size={18} /></Rating>
-        <Rating>Service Rating:<ReactStars count={5} value={1.5} edit={false} size={18} /></Rating>
-        <Rating>Overall Rating:<ReactStars count={5} value={3.5} edit={false} size={18} /></Rating> */}
+        <Rating>Food Rating:<BeautyStars value={5} edit={false} size={15} /></Rating>
+        <Rating>Price Rating:<BeautyStars value={3} edit={false} size={15} /></Rating>
+        <Rating>Service Rating:<BeautyStars value={1.5} edit={false} size={15} /></Rating>
+        <Rating>Overall Rating:<BeautyStars value={3.5} edit={false} size={15} /></Rating>
       </RatingsWrapper>
 
       <Review>Food was great!</Review>

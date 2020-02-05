@@ -14,14 +14,10 @@ import { Navigation } from './components/Navigation/Navigation';
 import { AddRestaurant } from './components/Restaurants/AddRestaurant';
 import { Dashboard } from './components/Restaurants/Dashboard';
 import { EditRestaurant } from './components/Restaurants/EditRestaurant';
-import { Restaurants } from './components/Restaurants/Restaurants';
 
 import { AddReview } from './components/Reviews/AddReview';
 import { EditReview } from './components/Reviews/editReview';
 import { Reviews } from './components/Reviews/Reviews'
-
-import './App.css';
-import axios from 'axios'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,12 +31,12 @@ function App() {
       <Route exact path="/" />
       <Route path="/login" component={Login}/>
       <Route path="/signup" component={Signup}/>
-      <Route path="/add-restaurant" component={AddRestaurant}/>
-      <Route path="/edit-restaurant" component={EditRestaurant}/>
-      <Route path="/explore" component={Dashboard}/>
-      <Route path="/add-review" component={AddReview}/>
-      <Route path="/edit-review" component={EditReview}/>
-      <Route path="/reviews" component={Reviews}/>
+      <PrivateRoute path="/add-restaurant" component={AddRestaurant}/>
+      <PrivateRoute path="/edit-restaurant" component={EditRestaurant}/>
+      <PrivateRoute path="/explore" component={Dashboard}/>
+      <PrivateRoute path="/add-review" component={AddReview}/>
+      <PrivateRoute path="/edit-review" component={EditReview}/>
+      <PrivateRoute path="/reviews" component={Reviews}/>
     </Router>
     </Wrapper>
   )
