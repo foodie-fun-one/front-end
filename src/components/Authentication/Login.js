@@ -51,9 +51,9 @@ const LoginForm = (props) => {
                             name="username"
                             placeholder="i<3food@gmail.com"
                             onChange={handleChange}
-                            value={user.email}
-                            ref={register({
-
+                            value={user.username}
+                            innerRef={register({
+                                required: "Username is required"
                             })}
                         />
                         {errors.username && <p>{errors.username.message}</p>}
@@ -67,7 +67,7 @@ const LoginForm = (props) => {
                             onChange={handleChange}
                             value={user.password}
                             placeholder="********"
-                            ref={register({
+                            innerRef={register({
                                 required: "Password is required",
                                 minLength: {
                                     value: 8,

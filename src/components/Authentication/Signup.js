@@ -14,7 +14,6 @@ import "./Signup.css";
 
 const SignUpForm = (props) => {
     const { register, handleSubmit, errors, watch } = useForm();
-    console.log("TESTING", register, handleSubmit);
     const [newUser, setNewUser] = useState({
         email: "",
         username: "",
@@ -56,7 +55,7 @@ const SignUpForm = (props) => {
                             placeholder="i<3food@email.com"
                             onChange={handleChanges}
                             value={newUser.email}
-                            ref={register({
+                            innerRef={register({
                                 required: "Email is required",
                                 pattern: /^\S+@\S+$/i
                             })}
@@ -72,7 +71,7 @@ const SignUpForm = (props) => {
                             placeholder="FoodChampion2"
                             onChange={handleChanges}
                             value={newUser.username}
-                            ref={register({
+                            innerRef={register({
                                 required: "Name is required",
                                 maxLength: {
                                     value: 50,
@@ -91,7 +90,7 @@ const SignUpForm = (props) => {
                             placeholder="********"
                             onChange={handleChanges}
                             value={newUser.password}
-                            ref={register({
+                            innerRef={register({
                                 required: "Password is required",
                                 minLength: {
                                     value: 8,
@@ -108,7 +107,7 @@ const SignUpForm = (props) => {
                             type="password"
                             name="password_confirm"
                             placeholder="********"
-                            ref={register({
+                            innerRef={register({
                                 validate: value =>
                                     value === password.current || "Passwords must be the same"
                             })}
@@ -124,7 +123,7 @@ const SignUpForm = (props) => {
                             placeholder="Boston"
                             onChange={handleChanges}
                             value={newUser.city}
-                            ref={register({
+                            innerRef={register({
                                 required: "Location is required"
                             })}
                         />
@@ -143,98 +142,3 @@ const SignUpForm = (props) => {
 }
 
 export default SignUpForm;
-
-{/* <Container className="signup-form-container" >
-            <Form className="signup-form" onSubmit={event => event.preventDefault()}>
-            <h2>Create an Account</h2>
-                <FormGroup>
-                    <Label for="signupEmail">Email</Label>
-                    <Input
-                        id="signupEmail"
-                        type="email"
-                        name="email"
-                        placeholder="i<3food@email.com"
-                        onChange={handleChanges}
-                        value={newUser.email}
-                        ref={register({
-                            required: "Email is required",
-                            pattern: /^\S+@\S+$/i
-                        })}
-                    />
-                    {errors.email && <p>{errors.email.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label for="signupName">Name</Label>
-                    <Input
-                        id="signupName"
-                        type="text"
-                        name="username"
-                        placeholder="FoodChampion2"
-                        onChange={handleChanges}
-                        value={newUser.username}
-                        ref={register({
-                            required: "Name is required",
-                            maxLength: {
-                                value: 50,
-                                message: "Character limit exceeded"
-                            }
-                        })}
-                    />
-                    {errors.username && <p>{errors.username.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label for="signupPassword">Password</Label>
-                    <Input
-                        id="signupPassword"
-                        type="password"
-                        name="password"
-                        placeholder="********"
-                        onChange={handleChanges}
-                        value={newUser.password}
-                        ref={register({
-                            required: "Password is required",
-                            minLength: {
-                                value: 8,
-                                message: "Password must have at least 8 characters"
-                            }
-                        })}
-                    />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label for="signupConfirmPassword">Confirm Password</Label>
-                    <Input
-                        id="signupConfirmPassword"
-                        type="password"
-                        name="password_confirm"
-                        placeholder="********"
-                        ref={register({
-                            validate: value =>
-                                value === password.current || "Passwords must be the same"
-                        })}
-                    />
-                    {errors.password_confirm && <p>{errors.password_confirm.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label for="signupLocation">Location</Label>
-                    <Input
-                        id="signupLocation"
-                        type="text"
-                        name="city"
-                        placeholder="Boston"
-                        onChange={handleChanges}
-                        value={newUser.city}
-                        ref={register({
-                            required: "Location is required"
-                        })}
-                    />
-                    {errors.city && <p>{errors.city.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Button type="submit" onClick={handleSubmit(onSubmit)}>
-                        Create
-                        </Button>
-                </FormGroup>
-                <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>
-            </Form>
-        </Container> */}
