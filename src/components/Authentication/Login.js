@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import "./Login.css";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
     const [user, setUser] = useState({
         username: "",
         password: ""
@@ -21,12 +21,11 @@ const LoginForm = () => {
 
     const onSubmit = () => {
         axios
-            .post("https://foodiefun-buildweek.herokuapp.com/api/login", {
-                username: user.username,
-                password: user.password
-            })
+            .post("https://foodiefun-buildweek.herokuapp.com/api/login", user)
             .then(res => {
-                console.log("Login submitted successfully", res)
+                console.log(res.data.token)
+                localStorage.setItem('token', res.data.token);
+                props.history.push(`/explore`)
             })
             .catch(err => {
                 console.log("Login error occured", err)
@@ -44,17 +43,16 @@ const LoginForm = () => {
             <h2>Login to your Account</h2>
             <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup>
-                    <Label htmlFor="loginEmail">Email</Label>
+                    <Label htmlFor="loginEmail">Username</Label>
                     <Input
                         id="loginEmail"
-                        type="email"
+                        type="input"
                         name="username"
                         placeholder="i<3food@gmail.com"
                         onChange={handleChange}
                         value={user.username}
                         ref={register({
-                            required: "Email is required",
-                            pattern: /^\S+@\S+$/i
+                            name: "username",
                         })}
                     />
                     {errors.username && <p>{errors.username.message}</p>}
@@ -69,6 +67,7 @@ const LoginForm = () => {
                         value={user.password}
                         placeholder="********"
                         ref={register({
+                            name: "password",
                             required: "Password is required",
                             minLength: {
                                 value: 8,
@@ -79,7 +78,7 @@ const LoginForm = () => {
                     {errors.password && <p>{errors.password.message}</p>}
                 </FormGroup>
                 <FormGroup>
-                    <Button type="submit">
+                    <Button>
                         Login
                 </Button>
                 </FormGroup>
