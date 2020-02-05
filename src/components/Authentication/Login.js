@@ -8,7 +8,8 @@ import {
     FormGroup,
     Label,
     Input,
-    Col
+    Col,
+    FormText
 } from "reactstrap";
 import "./Login.css";
 
@@ -49,7 +50,7 @@ const LoginForm = (props) => {
                             id="loginEmail"
                             type="input"
                             name="username"
-                            placeholder="i<3food@gmail.com"
+                            placeholder="janesmith@email.com"
                             onChange={handleChange}
                             value={user.username}
                             innerRef={register({
@@ -66,7 +67,7 @@ const LoginForm = (props) => {
                             name="password"
                             onChange={handleChange}
                             value={user.password}
-                            placeholder="********"
+                            placeholder="P@ssWord3"
                             innerRef={register({
                                 required: "Password is required",
                                 minLength: {
@@ -76,6 +77,9 @@ const LoginForm = (props) => {
                             })}
                         />
                         {errors.password && <p>{errors.password.message}</p>}
+                        <FormText>
+                            <p>at least 8 characters</p>
+                        </FormText>
                     </FormGroup>
                     <FormGroup>
                         <Button>

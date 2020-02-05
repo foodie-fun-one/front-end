@@ -8,7 +8,8 @@ import {
     FormGroup,
     Label,
     Input,
-    Col
+    Col,
+    FormText
 } from "reactstrap";
 import "./Signup.css";
 
@@ -52,7 +53,7 @@ const SignUpForm = (props) => {
                             id="signupEmail"
                             type="email"
                             name="email"
-                            placeholder="i<3food@email.com"
+                            placeholder="janesmith@email.com"
                             onChange={handleChanges}
                             value={newUser.email}
                             innerRef={register({
@@ -68,7 +69,7 @@ const SignUpForm = (props) => {
                             id="signupName"
                             type="text"
                             name="username"
-                            placeholder="FoodChampion2"
+                            placeholder="Jane Smith"
                             onChange={handleChanges}
                             value={newUser.username}
                             innerRef={register({
@@ -87,7 +88,7 @@ const SignUpForm = (props) => {
                             id="signupPassword"
                             type="password"
                             name="password"
-                            placeholder="********"
+                            placeholder="p@ssWord3"
                             onChange={handleChanges}
                             value={newUser.password}
                             innerRef={register({
@@ -99,6 +100,9 @@ const SignUpForm = (props) => {
                             })}
                         />
                         {errors.password && <p>{errors.password.message}</p>}
+                        <FormText>
+                            <p>at least 8 characters</p>
+                        </FormText>
                     </FormGroup>
                     <FormGroup>
                         <Label for="signupConfirmPassword">Confirm Password</Label>
@@ -106,25 +110,28 @@ const SignUpForm = (props) => {
                             id="signupConfirmPassword"
                             type="password"
                             name="password_confirm"
-                            placeholder="********"
+                            placeholder="P@ssWord3"
                             innerRef={register({
                                 validate: value =>
                                     value === password.current || "Passwords must be the same"
                             })}
                         />
                         {errors.password_confirm && <p>{errors.password_confirm.message}</p>}
+                        <FormText>
+                            <p>at least 8 characters</p>
+                        </FormText>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="signupLocation">Location</Label>
+                        <Label for="signupCity">City</Label>
                         <Input
-                            id="signupLocation"
+                            id="signupCity"
                             type="text"
                             name="city"
-                            placeholder="Boston"
+                            placeholder="Anytown"
                             onChange={handleChanges}
                             value={newUser.city}
                             innerRef={register({
-                                required: "Location is required"
+                                required: "City is required"
                             })}
                         />
                         {errors.city && <p>{errors.city.message}</p>}
