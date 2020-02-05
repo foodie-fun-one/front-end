@@ -52,7 +52,7 @@ const LoginForm = (props) => {
                         onChange={handleChange}
                         value={user.username}
                         ref={register({
-
+                            name: "username",
                         })}
                     />
                     {errors.username && <p>{errors.username.message}</p>}
@@ -67,6 +67,7 @@ const LoginForm = (props) => {
                         value={user.password}
                         placeholder="********"
                         ref={register({
+                            name: "password",
                             required: "Password is required",
                             minLength: {
                                 value: 8,

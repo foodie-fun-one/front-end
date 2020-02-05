@@ -24,6 +24,7 @@ const SignUpForm = (props) => {
     })
     const password = useRef({});
     password.current = watch("password", "");
+    
     const onSubmit = () => {
         console.log(newUser)
         axios
@@ -57,6 +58,7 @@ const SignUpForm = (props) => {
                         onChange={handleChanges}
                         value={newUser.email}
                         ref={register({
+                            name: "email",
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i
                         })}
@@ -73,6 +75,7 @@ const SignUpForm = (props) => {
                         onChange={handleChanges}
                         value={newUser.username}
                         ref={register({
+                            name: "username",
                             required: "Name is required",
                             maxLength: {
                                 value: 50,
@@ -92,6 +95,7 @@ const SignUpForm = (props) => {
                         onChange={handleChanges}
                         value={newUser.password}
                         ref={register({
+                            name: "password",
                             required: "Password is required",
                             minLength: {
                                 value: 8,
@@ -109,6 +113,7 @@ const SignUpForm = (props) => {
                         name="password_confirm"
                         placeholder="********"
                         ref={register({
+                            name: "password_confirm",
                             validate: value =>
                                 value === password.current || "Passwords must be the same"
                         })}
@@ -125,6 +130,7 @@ const SignUpForm = (props) => {
                         onChange={handleChanges}
                         value={newUser.city}
                         ref={register({
+                            name: "city",
                             required: "Location is required"
                         })}
                     />
