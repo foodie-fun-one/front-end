@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -14,20 +14,35 @@ import {
 } from "reactstrap";
 import "./Signup.css";
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
     const { register, handleSubmit, errors, watch } = useForm();
+    const [newUser, setNewUser] = useState({
+        email: "",
+        username: "",
+        password: "",
+        city: "",
+    })
     const password = useRef({});
     password.current = watch("password", "");
-    const onSubmit = data => {
+    const onSubmit = () => {
+        console.log(newUser)
         axios
-            .post("https://reqres.in/api/users", data)
+            .post("https://foodiefun-buildweek.herokuapp.com/api/register", newUser)
             .then(res => {
                 console.log("SignUp submitted successfully", res)
+                props.history.push("/explore")
             })
             .catch(err => {
                 console.log("SignUp error occured", err)
             })
     };
+
+    const handleChanges = e => {
+        setNewUser({
+            ...newUser,
+            [e.target.name]: e.target.value
+        })
+    }
     return (
         <Container className="signup-form-container" >
             <h2>Create an Account</h2>
@@ -39,6 +54,8 @@ const SignUpForm = () => {
                         type="email"
                         name="email"
                         placeholder="i<3food@email.com"
+                        onChange={handleChanges}
+                        value={newUser.email}
                         ref={register({
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i
@@ -53,6 +70,8 @@ const SignUpForm = () => {
                         type="text"
                         name="username"
                         placeholder="FoodChampion2"
+                        onChange={handleChanges}
+                        value={newUser.username}
                         ref={register({
                             required: "Name is required",
                             maxLength: {
@@ -70,6 +89,8 @@ const SignUpForm = () => {
                         type="password"
                         name="password"
                         placeholder="********"
+                        onChange={handleChanges}
+                        value={newUser.password}
                         ref={register({
                             required: "Password is required",
                             minLength: {
@@ -99,13 +120,15 @@ const SignUpForm = () => {
                     <Input
                         id="signupLocation"
                         type="text"
-                        name="location"
+                        name="city"
                         placeholder="Boston"
+                        onChange={handleChanges}
+                        value={newUser.city}
                         ref={register({
                             required: "Location is required"
                         })}
                     />
-                    {errors.location && <p>{errors.location.message}</p>}
+                    {errors.city && <p>{errors.city.message}</p>}
                 </FormGroup>
                 <FormGroup>
                     <Button type="submit" onClick={handleSubmit(onSubmit)}>
