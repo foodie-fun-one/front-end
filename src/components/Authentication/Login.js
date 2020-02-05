@@ -35,7 +35,7 @@ const LoginForm = () => {
 
     const handleChange = e => {
         setUser({
-            ...user, 
+            ...user,
             [e.target.name]: e.target.value,
         })
     }
@@ -48,10 +48,10 @@ const LoginForm = () => {
                     <Input
                         id="loginEmail"
                         type="email"
-                        name="username"
+                        name="email"
                         placeholder="i<3food@gmail.com"
                         onChange={handleChange}
-                        value={user.username}
+                        value={user.email}
                         ref={register({
                             required: "Email is required",
                             pattern: /^\S+@\S+$/i

@@ -29,7 +29,7 @@ const SignUpForm = () => {
             })
     };
     return (
-        <Container className="signup-form-container" fluid="">
+        <Container className="signup-form-container" >
             <h2>Create an Account</h2>
             <Form className="signup-form" onSubmit={event => event.preventDefault()}>
                 <FormGroup>
