@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {
     Button,
-    Container,
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    Col
 } from "reactstrap";
 import "./Login.css";
 
@@ -39,51 +39,53 @@ const LoginForm = (props) => {
         })
     }
     return (
-        <Container className="login-form-container">
-            <h2>Login to your Account</h2>
+        <div className="login-form-container">
             <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <FormGroup>
-                    <Label htmlFor="loginEmail">Username</Label>
-                    <Input
-                        id="loginEmail"
-                        type="input"
-                        name="username"
-                        placeholder="i<3food@gmail.com"
-                        onChange={handleChange}
-                        value={user.email}
-                        ref={register({
+                <Col>
+                    <h2>Login to your Account</h2>
+                    <FormGroup>
+                        <Label htmlFor="loginEmail">Username</Label>
+                        <Input
+                            id="loginEmail"
+                            type="input"
+                            name="username"
+                            placeholder="i<3food@gmail.com"
+                            onChange={handleChange}
+                            value={user.email}
+                            ref={register({
 
-                        })}
-                    />
-                    {errors.username && <p>{errors.username.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="loginPassword">Password</Label>
-                    <Input
-                        id="loginPassword"
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        value={user.password}
-                        placeholder="********"
-                        ref={register({
-                            required: "Password is required",
-                            minLength: {
-                                value: 8,
-                                message: "Password must have at least 8 characters"
-                            }
-                        })}
-                    />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Button>
-                        Login
+                            })}
+                        />
+                        {errors.username && <p>{errors.username.message}</p>}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="loginPassword">Password</Label>
+                        <Input
+                            id="loginPassword"
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            value={user.password}
+                            placeholder="********"
+                            ref={register({
+                                required: "Password is required",
+                                minLength: {
+                                    value: 8,
+                                    message: "Password must have at least 8 characters"
+                                }
+                            })}
+                        />
+                        {errors.password && <p>{errors.password.message}</p>}
+                    </FormGroup>
+                    <FormGroup>
+                        <Button>
+                            Login
                 </Button>
-                </FormGroup>
-                <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                    </FormGroup>
+                    <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                </Col>
             </Form>
-        </Container>
+        </div>
     )
 }
 
