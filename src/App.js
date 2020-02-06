@@ -22,6 +22,7 @@ import { Reviews } from './components/Reviews/Reviews';
 import { RestrauntContext } from './contexts/RestrauntContext'
 
 import { axiosWithAuth } from './Utils/AuthAxios'
+import "./App.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -46,8 +47,8 @@ function App() {
   return (
     <Wrapper>
       <Router>
-        <RestrauntContext.Provider value={{restaurants, setRestaurants, findID, restrauntID}}>
-        <Navigation />
+        <RestrauntContext.Provider value={{ restaurants, setRestaurants, findID, restrauntID }}>
+          <Navigation />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />

@@ -26,6 +26,12 @@ const SubmitButton = styled.button`
     font-size: 1.1rem;
     font-weight:500;
     box-shadow: 3px 2px #56423E;
+    &:hover{
+        background: #56423E;
+        box-shadow: 2px 1px #56423E;
+        border: 2px solid #56423E;
+        color: #EDE9D0;
+    }
 `
 
 const SignUpForm = (props) => {
@@ -139,8 +145,8 @@ const SignUpForm = (props) => {
                             Create
                         </SubmitButton>
                     </FormGroup>
-                    <div>
-                        <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>
+                    <div className="redirect">
+                        <p>Already have an account? <Link className="redirect-login" to="/login"> Login Here </Link></p>
                     </div>
                 </Col>
             </Form>

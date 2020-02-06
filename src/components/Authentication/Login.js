@@ -26,6 +26,11 @@ const SubmitButton = styled.button`
     font-size: 1.1rem;
     font-weight:500;
     box-shadow: 3px 2px #56423E;
+    &:hover{
+        background: #56423E;
+        box-shadow: 2px 1px #56423E;
+        border: 2px solid #56423E;
+        color: #EDE9D0;
 `
 
 const LoginForm = (props) => {
@@ -83,7 +88,7 @@ const LoginForm = (props) => {
                             name="password"
                             onChange={handleChange}
                             value={user.password}
-                            placeholder="P@ssWord3"
+                            placeholder="p@ssWord3"
                             innerRef={register({
                                 required: "please enter your password",
                                 minLength: {
@@ -102,8 +107,8 @@ const LoginForm = (props) => {
                             Login
                         </SubmitButton>
                     </FormGroup>
-                    <div>
-                        <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                    <div className="redirect">
+                        <p>Need an account? <Link className="redirect-signup" to="/signup"> Sign Up Here </Link></p>
                     </div>
                 </Col>
             </Form>
