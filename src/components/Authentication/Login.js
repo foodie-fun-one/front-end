@@ -4,13 +4,30 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import {
     Button,
-    Container,
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    Col,
+    FormText
 } from "reactstrap";
+import styled from "styled-components";
 import "./Login.css";
+
+// Styled components
+const SubmitButton = styled.button`
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    margin: 0.5rem 1rem;
+    width: 7rem;
+    background: #EDE9D0;
+    color: #e34129;
+    border: 2px solid #EDE9D0;
+    font-size: 1.1rem;
+    font-weight:500;
+    box-shadow: 3px 2px #56423E;
+`
 
 const LoginForm = (props) => {
     const [user, setUser] = useState({
@@ -34,57 +51,63 @@ const LoginForm = (props) => {
 
     const handleChange = e => {
         setUser({
-            ...user, 
+            ...user,
             [e.target.name]: e.target.value,
         })
     }
     return (
-        <Container className="login-form-container">
-            <h2>Login to your Account</h2>
+        <div className="login-form-container">
             <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <FormGroup>
-                    <Label htmlFor="loginEmail">Username</Label>
-                    <Input
-                        id="loginEmail"
-                        type="input"
-                        name="username"
-                        placeholder="i<3food@gmail.com"
-                        onChange={handleChange}
-                        value={user.username}
-                        ref={register({
-                            name: "username",
-                        })}
-                    />
-                    {errors.username && <p>{errors.username.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Label htmlFor="loginPassword">Password</Label>
-                    <Input
-                        id="loginPassword"
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        value={user.password}
-                        placeholder="********"
-                        ref={register({
-                            name: "password",
-                            required: "Password is required",
-                            minLength: {
-                                value: 8,
-                                message: "Password must have at least 8 characters"
-                            }
-                        })}
-                    />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </FormGroup>
-                <FormGroup>
-                    <Button>
-                        Login
-                </Button>
-                </FormGroup>
-                <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                <Col>
+                    <h2>Login to your Account</h2>
+                    <FormGroup>
+                        <Label htmlFor="loginEmail">Username</Label>
+                        <Input
+                            id="loginEmail"
+                            type="input"
+                            name="username"
+                            placeholder="janesmith@email.com"
+                            onChange={handleChange}
+                            value={user.username}
+                            innerRef={register({
+                                required: "please enter your account's email"
+                            })}
+                        />
+                        {errors.username && <p>{errors.username.message}</p>}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor="loginPassword">Password</Label>
+                        <Input
+                            id="loginPassword"
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            value={user.password}
+                            placeholder="P@ssWord3"
+                            innerRef={register({
+                                required: "please enter your password",
+                                minLength: {
+                                    value: 8,
+                                    message: "sorry, that password is too short"
+                                }
+                            })}
+                        />
+                        {errors.password && <p>{errors.password.message}</p>}
+                        <FormText>
+                            <p>at least 8 characters</p>
+                        </FormText>
+                    </FormGroup>
+                    <FormGroup className="button-container">
+                        <SubmitButton className="signup-button">
+                            Login
+                        </SubmitButton>
+                    </FormGroup>
+                    <div>
+                        <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                    </div>
+                </Col>
             </Form>
-        </Container>
+        </div>
     )
 }
 
