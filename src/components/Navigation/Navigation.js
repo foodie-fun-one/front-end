@@ -43,7 +43,7 @@ export const Navigation = () => {
   } else {
     button = <Button><FontAwesomeIcon icon={faSignInAlt} color="black"/><P>Log in!</P></Button>
   }
-
+  
   return(
     <Wrapper>
       <Link to = "/explore"><FontAwesomeIcon size="4x" color="black" icon={faHamburger}/></Link>

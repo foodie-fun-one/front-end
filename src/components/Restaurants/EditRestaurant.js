@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+
 import styled from 'styled-components'
+import { axiosWithAuth } from '../../Utils/AuthAxios'
+import { RestrauntContext } from '../../contexts/RestrauntContext'
 
 const Wrapper = styled.div`
   width: 75%;
@@ -37,8 +40,11 @@ const Button = styled.button`
     }
 `
 
-export const EditRestaurant = () => {
+export const EditRestaurant = (props) => {
+  const {restrauntID, restaurants } = useContext(RestrauntContext);
+
   const [editRestaurant, setEditRestaurant] = useState({
+    id: restrauntID,
     name: "",
     hours: "",
     address: "",
@@ -53,13 +59,23 @@ export const EditRestaurant = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    axiosWithAuth().put(`/api/restaurants/${restrauntID}`, editRestaurant)
+    .then(res => {
+      console.log(restaurants)
+      console.log(editRestaurant)
+      props.history.push('/explore')
+      const edittedRestraunt = restaurants.map(el => el.id)
+      const indexOfChangedRestraunt = edittedRestraunt.indexOf(restrauntID)
+      // setRestaurants(...restaurants, restaurants[indexOfChangedRestraunt] = editRestaurant)
+    })
+    .catch(err => console.log(err))
+    console.log(restaurants)
   }
-
   return (
     <Wrapper>
       <Form onSubmit={onSubmit}>
         <FormWrappers>
-          <label for="name">Restaurant Name: </label>
+          <label htmlFor="name">Restaurant Name: </label>
           <Input
             type="input"
             name="name"
@@ -69,7 +85,7 @@ export const EditRestaurant = () => {
         </FormWrappers>
 
         <FormWrappers>
-          <label for="hours">Restaurant Hours: </label>
+          <label htmlFor="hours">Restaurant Hours: </label>
           <Input
             type="input"
             name="hours"
@@ -79,7 +95,7 @@ export const EditRestaurant = () => {
         </FormWrappers>
 
         <FormWrappers>
-          <label for="address">Restaurant Address: </label>
+          <label htmlFor="address">Restaurant Address: </label>
           <Input
             type="input"
             name="address"

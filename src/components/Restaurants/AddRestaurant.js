@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
+import { axiosWithAuth } from '../../Utils/AuthAxios'
 
+import { RestrauntContext } from '../../contexts/RestrauntContext'
 const Wrapper = styled.div`
   width: 75%;
   margin: 0 auto;
@@ -37,7 +39,8 @@ const Button = styled.button`
     }
 `
 
-export const AddRestaurant = () => {
+export const AddRestaurant = (props) => {
+  const { restaurants, setRestaurants } = useContext(RestrauntContext)
   const [restaurant, setRestaurant] = useState({
     name: "",
     hours: "",
@@ -45,22 +48,26 @@ export const AddRestaurant = () => {
   })
 
   const handleChange = e => {
-    console.log(e.target.name, e.target.value)
     setRestaurant({
       ...restaurant,
       [e.target.name]: e.target.value
     })
   }
 
-  const onSubmit = e => {
-    e.preventDefault();
+  const onSubmit = () => {
+    axiosWithAuth().post("/api/restaurants", restaurant)
+    .then(res => {
+      setRestaurants(restaurants.concat(restaurant))
+    })
+      .catch(err => console.log(err))
+    props.history.push('/explore')
   }
-
+  console.log(restaurants)
   return (
     <Wrapper>
       <Form onSubmit={onSubmit}>
         <FormWrappers>
-          <label for="name">Restaurant Name: </label>
+          <label htmlFor="name">Restaurant Name: </label>
           <Input
             type="input"
             name="name"
@@ -70,7 +77,7 @@ export const AddRestaurant = () => {
         </FormWrappers>
 
         <FormWrappers>
-          <label for="hours">Restaurant Hours: </label>
+          <label htmlFor="hours">Restaurant Hours: </label>
           <Input
             type="input"
             name="hours"
@@ -80,7 +87,7 @@ export const AddRestaurant = () => {
         </FormWrappers>
 
         <FormWrappers>
-          <label for="address">Restaurant Address: </label>
+          <label htmlFor="address">Restaurant Address: </label>
           <Input
             type="input"
             name="address"
