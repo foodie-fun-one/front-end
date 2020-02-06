@@ -1,21 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import BeautyStars from 'beauty-stars';
 
+import { RestrauntContext } from '../../contexts/RestrauntContext'
+
 const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`
+
+const CardWrapper = styled.div`
+  width: 100%;
   border: 1px solid gray;
-  margin: 2% 0;
-  padding: 1%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
-  height: 50%;
+  margin: 2% 0;
+  padding: 1%;
 `
 
 const InfoWrapper = styled.div`
+  width: 25%
   display: flex;
   flex-direction: column;
 `
@@ -62,11 +71,10 @@ const Review = styled.div`
 `
 
 const Button = styled.button`
-  width: 100%;
   border-radius: 10px;
   border: 1px solid black;
   padding: 25%;
-  margin: 0%;
+  margin: 2% 10%;
   
   &:hover{
     text-decoration: underline;
@@ -78,16 +86,23 @@ const DotWrapper = styled.div`
 `
 
 export const Restaurant = (props) => {
+  const { name, address, hours, id} = props.restaurants
+  const {findID} = useContext(RestrauntContext)
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
+  let button;
+
+  let defaultReviewMessage = "Click on the add review button to review the resteraunt"
+
   return (
     <Wrapper>
+      <CardWrapper>
       <InfoWrapper>
-        <Title>Restaurant Name!</Title>
-        <Hours>Hours: 8:30-2:30</Hours>
-        <Address>12345 StreetName Rd. City, State</Address>
+        <Title>{name}</Title>
+        <Hours>Hours: {hours}</Hours>
+        <Address>{address}</Address>
       </InfoWrapper>
 
       <RatingsWrapper>
@@ -97,9 +112,8 @@ export const Restaurant = (props) => {
         <Rating>Overall Rating:<BeautyStars value={3.5} edit={false} size={15} /></Rating>
       </RatingsWrapper>
 
-      <Review>Food was great!</Review>
+      <Review>{defaultReviewMessage}</Review>
 
-      <Link to="/edit-review"><Button>Edit Review</Button></Link>
 
       <OptionsWrapper>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
@@ -107,12 +121,13 @@ export const Restaurant = (props) => {
         <DotWrapper>...</DotWrapper>
         </DropdownToggle>
       <DropdownMenu>
-      <Link to="/edit-restaurant"><DropdownItem>Edit Restaurant</DropdownItem></Link>
-        <DropdownItem>Delete Restaurant</DropdownItem>
+      <Link to="/edit-restaurant" onClick={()=>{findID(id)}}><DropdownItem>Edit Restaurant</DropdownItem></Link>
+        <DropdownItem onClick={()=> {props.DeleteRestaurant(id)}}>Delete Restaurant</DropdownItem>
       </DropdownMenu>
     </Dropdown>
       </OptionsWrapper>
-
+      </CardWrapper>
+      <Link to="/edit-review"><Button>Edit Review</Button></Link>
     </Wrapper>
   )
 }
