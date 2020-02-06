@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components'
+
+import { RestrauntContext } from '../../contexts/RestrauntContext'
 
 import { Restaurant } from './Restaurant'
 
-const Wrapper = styled.div`
+import { axiosWithAuth } from '../../Utils/AuthAxios'
 
+const Wrapper = styled.div`
+  font-family: 'Varela Round', sans-serif;
 `
 
 export const Restaurants = () => {
+  const { restaurants, setRestaurants } = useContext(RestrauntContext)
+  
+  const DeleteRestaurant = (id) => {
+    axiosWithAuth().delete(`/api/restaurants/${id}`)
+    .then(res => {
+      setRestaurants(restaurants.filter(item => item.id !== id))
+    })
+    .catch(err => console.log(err))
+  }
+  
   return(
   <Wrapper>
-    <Restaurant />
+    {restaurants.map((item) => <Restaurant 
+    key={item.id} 
+    restaurants={item} 
+    setRestaurants={setRestaurants} 
+    DeleteRestaurant={DeleteRestaurant}
+    />)}
   </Wrapper>
 )}
