@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHamburger, faUsers, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHamburger, faUsers, faSignInAlt, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import Logout from '../Authentication/Logout'
 
 const Wrapper = styled.div`
   width: 90%;
@@ -34,7 +35,14 @@ const P = styled.p`
 `
 
 export const Navigation = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [reloadPage, setReloadPage] = useState(true)
+  let button;
+
+  if(localStorage.getItem('token')){
+    button = <Button onClick={()=>{Logout(); setReloadPage(!reloadPage)}}><FontAwesomeIcon icon={faSignOutAlt} color="black"/><P>Log out!</P></Button>
+  } else {
+    button = <Button><FontAwesomeIcon icon={faSignInAlt} color="black"/><P>Log in!</P></Button>
+  }
 
   return(
     <Wrapper>
@@ -49,14 +57,9 @@ export const Navigation = () => {
       </Button>
       </Link>
 
-      <Link to="/login">
-      <Button onClick={() =>{setLoggedIn(!loggedIn)}}>
-      <FontAwesomeIcon icon={faSignInAlt} color="black"/>
-      {loggedIn === true ? <P>Log Out</P> :
-       loggedIn === false ? <P>Log in</P> :
-       null}
-      </Button>
-       </Link>
+        <Link to="/login">
+        {button}
+        </Link>
 
         <Link to="/signup">
       <Button>
