@@ -12,34 +12,46 @@ const Wrapper = styled.div`
 `
 
 const Form = styled.form`
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
+border-radius: 10px;
+background: rgba(233, 109, 88, 0.9);
+box-shadow: 4px 8px 3px #BB8378;
+color: #FFF6F4;
+font-size: 1.2rem;
+margin: 5% 0;
+padding: 5% 0;
 `
 
-const FormWrappers = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 15%;
-  margin: 1% auto;
+const H1 = styled.h1`
+text-align: center;
 `
 
-const Input = styled.input`
+const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 25%;
+  margin: 2% auto;
+  height: 15vh;
 `
 
 const Button = styled.button`
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  margin-top: 15%;
+border-radius: 5px;
+padding: 0.5rem 7.5%;
+margin: 1rem auto;
+background: #EDE9D0;
+color: #e34129;
+border: 2px solid #EDE9D0;
+font-size: 1.1rem;
+font-weight:500;
+box-shadow: 3px 2px #56423E;
+white-space: nowrap;
 
-    &:hover{
-      background-color: #45a049;
-    }
+&:hover{
+    background: #56423E;
+    box-shadow: 2px 1px #56423E;
+    border: 2px solid #56423E;
+    color: #EDE9D0;
 `
 const Rating = styled.div`
   display: flex;
@@ -49,8 +61,33 @@ const Rating = styled.div`
   padding-bottom: 2%;
 `
 
-const ComeBackButton = styled.div`
+const ComeBack = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
+const ComeBackButton = styled.div`
+border-radius: 5px;
+padding: 0.5rem 1rem;
+margin: 1rem auto;
+background: #EDE9D0;
+border: 2px solid #EDE9D0;
+font-size: 1.1rem;
+font-weight:500;
+box-shadow: 3px 2px #56423E;
+white-space: nowrap;
+`
+
+const Yes = styled.p`
+  color: green;
+  padding: 0%;
+  margin: 0%;
+`
+const No = styled.p`
+color: red;
+padding: 0%;
+margin: 0%;
 `
 
 export const AddReview = () => {
@@ -65,67 +102,67 @@ export const AddReview = () => {
 
   const [review_disc, set_Review_Disc] = useState("")
 
-  let testObj = {}
-
-  axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
-  .then(res => {console.log(res)})
-  .catch(err => console.log(err))
-
   const handleSubmit = e => {
     e.preventDefault();
-    testObj = {
+    axiosWithAuth().post(`/api/reviews/restaurant/${restrauntID}`, ({
+      user_id: parseInt(localStorage.getItem('ID')),
       restaurant_id: restrauntID,
       review_disc: review_disc,
       price_rating: starRatings.price_rating,
       service_rating: starRatings.service_rating,
       food_rating: starRatings.food_rating,
       eat_again: eat_again
-    }
-    console.log(testObj)
-    function getCurrentUser(req, res) {
-      console.log(req.req_id)
-       }
-      console.log(getCurrentUser)
+    }))
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err))
+
+    axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
+      .then(res => { console.log(res) })
+      .catch(err => console.log(err))
   }
-  return(
+  return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
+      <H1 style={{ fontFamily: "Mogra"}}>Edit Restaurant</H1>
+        <Rating>Food Rating:<BeautyStars
+          onChange={value => setStarRatings({ ...starRatings, food_rating: value })}
+          value={starRatings.food_rating}
+          size={15} />
+        </Rating>
 
-      <Rating>Food Rating:<BeautyStars 
-      onChange={value => setStarRatings({...starRatings, food_rating: value})} 
-      value={starRatings.food_rating} 
-      activeColor={"#DA291C"} 
-      size={15} />
-      </Rating>
+        <Rating>Price Rating:<BeautyStars
+          onChange={value => setStarRatings({ ...starRatings, price_rating: value })}
+          value={starRatings.price_rating}
+          size={15} />
+        </Rating>
 
-      <Rating>Price Rating:<BeautyStars 
-      onChange={value => setStarRatings({...starRatings, price_rating: value})} 
-      value={starRatings.price_rating} 
-      activeColor={"#DA291C"} 
-      size={15} />
-      </Rating>
+        <Rating>Service Rating:<BeautyStars
+          onChange={value => setStarRatings({ ...starRatings, service_rating: value })}
+          value={starRatings.service_rating}
+          size={15} />
+        </Rating>
 
-      <Rating>Service Rating:<BeautyStars 
-      onChange={value => setStarRatings({...starRatings, service_rating: value})} 
-      value={starRatings.service_rating} 
-      activeColor={"#DA291C"} 
-      size={15} />
-      </Rating>
+        <TextArea
+          name="review"
+          rows="10"
+          placeholder="Add a review!"
+          value={review_disc}
+          onChange={(e) => set_Review_Disc(e.target.value)}
+        />
 
-      Would you come back?
-      <ComeBackButton onClick={()=> {setEat_Again(!eat_again)}}>
-        {eat_again === true ? <p>Yes!</p> :
-        eat_again === false ? <p>No!</p> :
-        null}
-      </ComeBackButton>
+        <ComeBack>
+          Would you come back?
+      <ComeBackButton onClick={() => { setEat_Again(!eat_again) }}>
+            {eat_again === true ? <Yes>Yes!</Yes> :
+              eat_again === false ? <No>No!</No> :
+                null}
+          </ComeBackButton>
+        </ComeBack>
 
-      <Input 
-      type="text"
-      name="review"
-      value={review_disc}
-      onChange={(e)=> set_Review_Disc(e.target.value)}
-      />
-      <Button>Add Review</Button>
+        <Button>Add Review</Button>
       </Form>
     </Wrapper>
-)}
+  )
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 import styled from 'styled-components'
 import { axiosWithAuth } from '../../Utils/AuthAxios'
@@ -10,9 +10,19 @@ const Wrapper = styled.div`
 `
 
 const Form = styled.form`
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
+border-radius: 10px;
+background: rgba(233, 109, 88, 0.9);
+box-shadow: 4px 8px 3px #BB8378;
+color: #FFF6F4;
+font-size: 1.2rem;
+margin: 5% 0;
+padding: 5% 0;
+`
+
+const H1 = styled.h1`
+text-align: center;
 `
 
 const FormWrappers = styled.div`
@@ -28,27 +38,34 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  margin-top: 15%;
+border-radius: 5px;
+padding: 0.5rem 0;
+margin: 1rem auto;
+background: #EDE9D0;
+color: #e34129;
+border: 2px solid #EDE9D0;
+font-size: 1.1rem;
+font-weight:500;
+box-shadow: 3px 2px #56423E;
+white-space: nowrap;
 
-    &:hover{
-      background-color: #45a049;
-    }
+&:hover{
+    background: #56423E;
+    box-shadow: 2px 1px #56423E;
+    border: 2px solid #56423E;
+    color: #EDE9D0;
 `
 
 export const EditRestaurant = (props) => {
   const {restrauntID, restaurants } = useContext(RestrauntContext);
 
-  const [editRestaurant, setEditRestaurant] = useState({
+  let initialState = {
     id: restrauntID,
     name: "",
     hours: "",
     address: "",
-  })
+  }
+  const [editRestaurant, setEditRestaurant] = useState(initialState)
 
   const handleChange = e => {
     setEditRestaurant({
@@ -56,6 +73,21 @@ export const EditRestaurant = (props) => {
       [e.target.name]: e.target.value
     })
   }
+
+  useEffect(()=> {
+    axiosWithAuth().get(`/api/restaurants/${restrauntID}`)
+    .then(res =>{
+      console.log(res)
+      return initialState = {
+        id: restrauntID,
+        name: res.data.name,
+        hours: res.data.hours,
+        address: res.data.address,
+      }
+    }, [])
+    .catch(err => console.log(err))
+    console.log(initialState)
+  })
 
   const onSubmit = e => {
     e.preventDefault();
@@ -74,6 +106,7 @@ export const EditRestaurant = (props) => {
   return (
     <Wrapper>
       <Form onSubmit={onSubmit}>
+        <H1 style={{ fontFamily: "Mogra"}}>Edit Restaurant</H1>
         <FormWrappers>
           <label htmlFor="name">Restaurant Name: </label>
           <Input
