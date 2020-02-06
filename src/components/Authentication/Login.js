@@ -11,7 +11,23 @@ import {
     Col,
     FormText
 } from "reactstrap";
+import styled from "styled-components";
 import "./Login.css";
+
+// Styled components
+const SubmitButton = styled.button`
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    margin: 0.5rem 1rem;
+    width: 7rem;
+    background: #EDE9D0;
+    color: #e34129;
+    border: 2px solid #EDE9D0;
+    font-size: 1.1rem;
+    font-weight:500;
+    box-shadow: 3px 2px #56423E;
+`
 
 const LoginForm = (props) => {
     const [user, setUser] = useState({
@@ -82,9 +98,9 @@ const LoginForm = (props) => {
                         </FormText>
                     </FormGroup>
                     <FormGroup className="button-container">
-                        <Button className="signup-button">
+                        <SubmitButton className="signup-button">
                             Login
-                        </Button>
+                        </SubmitButton>
                     </FormGroup>
                     <div>
                         <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>

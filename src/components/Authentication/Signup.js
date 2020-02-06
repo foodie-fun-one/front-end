@@ -11,7 +11,23 @@ import {
     Col,
     FormText
 } from "reactstrap";
+import styled from "styled-components";
 import "./Signup.css";
+
+// Styled components
+const SubmitButton = styled.button`
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    margin: 0.5rem 1rem;
+    width: 7rem;
+    background: #EDE9D0;
+    color: #e34129;
+    border: 2px solid #EDE9D0;
+    font-size: 1.1rem;
+    font-weight:500;
+    box-shadow: 3px 2px #56423E;
+`
 
 const SignUpForm = (props) => {
     const { register, handleSubmit, errors, watch } = useForm();
@@ -121,9 +137,9 @@ const SignUpForm = (props) => {
                         {errors.city && <p>{errors.city.message}</p>}
                     </FormGroup>
                     <FormGroup className="button-container">
-                        <Button className="signup-button" type="submit">
+                        <SubmitButton className="signup-button" type="submit">
                             Create
-                        </Button>
+                        </SubmitButton>
                     </FormGroup>
                     <div>
                         <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>

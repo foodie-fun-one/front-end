@@ -1,3 +1,6 @@
+#root{
+    background: #EDE9D0;
+}
 /* .login-form-container {
 
 } */
@@ -6,10 +9,27 @@
     width: 40%;
     margin: 3rem auto;
     padding: 1.2rem 0;
-    background: #ffae8f;
+    background: #E96C59;
     border-radius: 5px;
+    box-shadow: 4px 8px 3px #BB8378;
 }
 
 .login-form h2 {
     text-align: center;
+    color: #FFF6F4;
+    text-shadow: 2px 2px 1px #56423E;
+}
+
+label {
+    color: #FFF6F4;
+    text-shadow: 1px 1px #56423E;
+}
+
+input {
+    background: #FFF6F4;
+}
+
+p {
+    color: #FFF6F4;
+    text-shadow: 1px 1px #56423E;
 }
