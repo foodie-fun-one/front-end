@@ -8,7 +8,7 @@ import { Restaurant } from './Restaurant'
 import { axiosWithAuth } from '../../Utils/AuthAxios'
 
 const Wrapper = styled.div`
-
+  font-family: 'Varela Round', sans-serif;
 `
 
 export const Restaurants = () => {
