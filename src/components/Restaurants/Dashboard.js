@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { Restaurants } from './Restaurants'
-import './Dashboard.css';
+
 
 const Wrapper = styled.div`
   width: 75%;

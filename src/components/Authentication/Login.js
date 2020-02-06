@@ -71,7 +71,7 @@ const LoginForm = (props) => {
                             id="loginEmail"
                             type="input"
                             name="username"
-                            placeholder="janesmith@email.com"
+                            placeholder="Jane Smith"
                             onChange={handleChange}
                             value={user.username}
                             innerRef={register({

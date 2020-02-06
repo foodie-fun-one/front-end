@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHamburger, faUsers, faSignInAlt, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Logout from '../Authentication/Logout'
-import './Navigation.css';
 
 const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   height: 10vh;
-  background-color: white;
+  background: #FFF6F4;
+  box-shadow: 0 3px 3px #56423e;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
 `
 
 const ButtonDiv = styled.div`
