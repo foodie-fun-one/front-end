@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { Restaurants } from './Restaurants'
+import './Dashboard.css';
 
 const Wrapper = styled.div`
   width: 75%;
@@ -36,11 +37,12 @@ const AddButton = styled.button`
       color: #EDE9D0;
 `
 export const Dashboard = () => {
-  
-  return(
+
+  return (
     <Wrapper>
-      <h1 style={{ fontFamily: "Mogra"}}>Welcome to FoodieFun!</h1>
+      <h1 style={{ fontFamily: "Mogra" }}>Welcome to FoodieFun!</h1>
       <StyledLink to="/add-restaurant"><AddButton>Add Restaurant</AddButton></StyledLink>
       <Restaurants />
     </Wrapper>
-)}
+  )
+}
