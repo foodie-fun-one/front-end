@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -21,8 +21,7 @@ const SignUpForm = (props) => {
         password: "",
         city: "",
     })
-    // const password = useRef({});
-    // password.current = watch("password", props);
+
     const onSubmit = () => {
         console.log(newUser)
         axios
@@ -42,8 +41,7 @@ const SignUpForm = (props) => {
             [e.target.name]: e.target.value
         })
     }
-    //! "Input" reactstrap component will not register 1st key press
-    //! "Input" reactstrap password component will not register ANY key presses
+
     return (
         <div className="signup-form-container">
             <Form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
@@ -106,6 +104,7 @@ const SignUpForm = (props) => {
                             <p>at least 8 characters</p>
                         </FormText>
                     </FormGroup>
+
                     <FormGroup>
                         <Label htmlFor="signupCity">City</Label>
                         <Input
