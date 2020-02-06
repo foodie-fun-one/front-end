@@ -21,8 +21,8 @@ const SignUpForm = (props) => {
         password: "",
         city: "",
     })
-    const password = useRef({});
-    password.current = watch("password", props);
+    // const password = useRef({});
+    // password.current = watch("password", props);
     const onSubmit = () => {
         console.log(newUser)
         axios
@@ -42,13 +42,15 @@ const SignUpForm = (props) => {
             [e.target.name]: e.target.value
         })
     }
+    //! "Input" reactstrap component will not register 1st key press
+    //! "Input" reactstrap password component will not register ANY key presses
     return (
         <div className="signup-form-container">
-            <Form className="signup-form" onSubmit={event => event.preventDefault()}>
+            <Form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
                 <Col>
                     <h2>Create an Account</h2>
                     <FormGroup>
-                        <Label for="signupEmail">Email</Label>
+                        <Label htmlFor="signupEmail">Email</Label>
                         <Input
                             id="signupEmail"
                             type="email"
@@ -57,14 +59,14 @@ const SignUpForm = (props) => {
                             onChange={handleChanges}
                             value={newUser.email}
                             innerRef={register({
-                                required: "Email is required",
+                                required: "please enter your email",
                                 pattern: /^\S+@\S+$/i
                             })}
                         />
                         {errors.email && <p>{errors.email.message}</p>}
                     </FormGroup>
                     <FormGroup>
-                        <Label for="signupName">Name</Label>
+                        <Label htmlFor="signupName">Name</Label>
                         <Input
                             id="signupName"
                             type="text"
@@ -73,17 +75,17 @@ const SignUpForm = (props) => {
                             onChange={handleChanges}
                             value={newUser.username}
                             innerRef={register({
-                                required: "Name is required",
+                                required: "please enter your name",
                                 maxLength: {
                                     value: 50,
-                                    message: "Character limit exceeded"
+                                    message: "sorry, that name is too long"
                                 }
                             })}
                         />
                         {errors.username && <p>{errors.username.message}</p>}
                     </FormGroup>
                     <FormGroup>
-                        <Label for="signupPassword">Password</Label>
+                        <Label htmlFor="signupPassword">Password</Label>
                         <Input
                             id="signupPassword"
                             type="password"
@@ -92,10 +94,10 @@ const SignUpForm = (props) => {
                             onChange={handleChanges}
                             value={newUser.password}
                             innerRef={register({
-                                required: "Password is required",
+                                required: "please create a password",
                                 minLength: {
                                     value: 8,
-                                    message: "Password must have at least 8 characters"
+                                    message: "sorry, that password is too short"
                                 }
                             })}
                         />
@@ -105,24 +107,7 @@ const SignUpForm = (props) => {
                         </FormText>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="signupConfirmPassword">Confirm Password</Label>
-                        <Input
-                            id="signupConfirmPassword"
-                            type="password"
-                            name="password_confirm"
-                            placeholder="P@ssWord3"
-                            innerRef={register({
-                                validate: value =>
-                                    value === password.current || "Passwords must be the same"
-                            })}
-                        />
-                        {errors.password_confirm && <p>{errors.password_confirm.message}</p>}
-                        <FormText>
-                            <p>at least 8 characters</p>
-                        </FormText>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="signupCity">City</Label>
+                        <Label htmlFor="signupCity">City</Label>
                         <Input
                             id="signupCity"
                             type="text"
@@ -131,17 +116,19 @@ const SignUpForm = (props) => {
                             onChange={handleChanges}
                             value={newUser.city}
                             innerRef={register({
-                                required: "City is required"
+                                required: "please enter your city"
                             })}
                         />
                         {errors.city && <p>{errors.city.message}</p>}
                     </FormGroup>
                     <FormGroup className="button-container">
-                        <Button className="signup-button" type="submit" onClick={handleSubmit(onSubmit)}>
+                        <Button className="signup-button" type="submit">
                             Create
                         </Button>
                     </FormGroup>
-                    <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>
+                    <div>
+                        <p>Already have an account?<Link className="redirect-login" to="/login"> Login Here</Link></p>
+                    </div>
                 </Col>
             </Form>
         </div>

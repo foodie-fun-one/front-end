@@ -54,7 +54,7 @@ const LoginForm = (props) => {
                             onChange={handleChange}
                             value={user.username}
                             innerRef={register({
-                                required: "Username is required"
+                                required: "please enter your account's email"
                             })}
                         />
                         {errors.username && <p>{errors.username.message}</p>}
@@ -69,10 +69,10 @@ const LoginForm = (props) => {
                             value={user.password}
                             placeholder="P@ssWord3"
                             innerRef={register({
-                                required: "Password is required",
+                                required: "please enter your password",
                                 minLength: {
                                     value: 8,
-                                    message: "Password must have at least 8 characters"
+                                    message: "sorry, that password is too short"
                                 }
                             })}
                         />
@@ -81,12 +81,14 @@ const LoginForm = (props) => {
                             <p>at least 8 characters</p>
                         </FormText>
                     </FormGroup>
-                    <FormGroup>
-                        <Button>
+                    <FormGroup className="button-container">
+                        <Button className="signup-button">
                             Login
-                </Button>
+                        </Button>
                     </FormGroup>
-                    <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                    <div>
+                        <p>Need an account?<Link className="redirect-signup" to="/signup"> Sign Up Here</Link></p>
+                    </div>
                 </Col>
             </Form>
         </div>
