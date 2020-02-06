@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  color: white;
 `
 
 const CardWrapper = styled.div`
@@ -21,6 +22,9 @@ const CardWrapper = styled.div`
   position: relative;
   margin: 2% 0;
   padding: 1%;
+  background-color: #e96c59;
+  box-shadow: 4px 8px 3px #BB8378;
+  border-radius: 10px;
 `
 
 const InfoWrapper = styled.div`
@@ -39,6 +43,10 @@ const OptionsWrapper = styled.div`
   right: 0px;
   top: 0px;
   z-index: 2;
+
+  &#optionsButton {
+    background-color: purple;
+  }
 `
 
 const Rating = styled.div`
@@ -117,7 +125,7 @@ export const Restaurant = (props) => {
 
       <OptionsWrapper>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle className="optionsButton" color="light" tag="button">
+      <DropdownToggle id="optionsButton" tag="button">
         <DotWrapper>...</DotWrapper>
         </DropdownToggle>
       <DropdownMenu>
@@ -128,6 +136,7 @@ export const Restaurant = (props) => {
       </OptionsWrapper>
       </CardWrapper>
       <Link to="/edit-review"><Button>Edit Review</Button></Link>
+      <Link to="/add-review"><Button onClick={()=>{findID(id)}}>Add Review</Button></Link>
     </Wrapper>
   )
 }

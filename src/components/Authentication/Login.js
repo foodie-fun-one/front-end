@@ -44,8 +44,8 @@ const LoginForm = (props) => {
         axios
             .post("https://foodiefun-buildweek.herokuapp.com/api/login", user)
             .then(res => {
-                console.log(res.data.token)
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem("ID", res.data.userID);
                 props.history.push(`/explore`)
                 window.location.reload(false)
             })
