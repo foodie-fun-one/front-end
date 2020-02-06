@@ -23,7 +23,8 @@ const CardWrapper = styled.div`
   margin: 2% 0;
   padding: 1%;
   background-color: #e96c59;
-  box-shadow: 3px 2px #56423E;
+  box-shadow: 4px 8px 3px #BB8378;
+  border-radius: 10px;
 `
 
 const InfoWrapper = styled.div`

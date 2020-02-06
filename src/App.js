@@ -37,6 +37,10 @@ function App() {
     axiosWithAuth().get("/api/restaurants")
       .then(res => { setRestaurants(res.data) })
       .catch(err => console.log(err))
+
+    axiosWithAuth().get(`/api/reviews/user/${restrauntID}`)
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err))
   }, [])
 
   const findID = (id) => {
