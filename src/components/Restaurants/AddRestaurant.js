@@ -9,9 +9,10 @@ const Wrapper = styled.div`
 `
 
 const Form = styled.form`
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+  background: rgba(233, 109, 88, 0.8);
 `
 
 const FormWrappers = styled.div`
