@@ -1,11 +1,3 @@
-#root{
-    background: #EDE9D0;
-}
-
-/* .signup-form-container {
-    box-shadow: 10px 0 #BB8378;
-} */
-
 .signup-form {
     width: 40%;
     margin: 3rem auto;
@@ -13,12 +5,14 @@
     background: #E96C59;
     border-radius: 5px;
     box-shadow: 4px 8px 3px #BB8378;
+    font-size: 1.1rem;
 }
 
 .signup-form h2 {
     text-align: center;
     color: #FFF6F4;
     text-shadow: 2px 2px 1px #56423E;
+    margin-bottom: 2rem;
 }
 
 label {
@@ -35,3 +29,16 @@ p {
     text-shadow: 1px 1px #56423E;
 }
 
+.redirect {
+    text-align: center;
+}
+
+.redirect-login {
+    color: #FFF6F4;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  a:hover {
+    text-decoration: none;
+  }
