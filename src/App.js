@@ -48,7 +48,7 @@ function App() {
       <Router>
         <RestrauntContext.Provider value={{restaurants, setRestaurants, findID, restrauntID}}>
         <Navigation />
-          <Route exact path="/" />
+          <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <PrivateRoute path="/add-restaurant" component={AddRestaurant} />

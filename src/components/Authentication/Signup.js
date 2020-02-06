@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {
-    Button,
     Form,
     FormGroup,
     Label,
@@ -30,7 +29,7 @@ const SubmitButton = styled.button`
 `
 
 const SignUpForm = (props) => {
-    const { register, handleSubmit, errors, watch } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const [newUser, setNewUser] = useState({
         email: "",
         username: "",

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {
-    Button,
     Form,
     FormGroup,
     Label,
@@ -43,6 +42,7 @@ const LoginForm = (props) => {
                 console.log(res.data.token)
                 localStorage.setItem('token', res.data.token);
                 props.history.push(`/explore`)
+                window.location.reload(false)
             })
             .catch(err => {
                 console.log("Login error occured", err)
@@ -70,7 +70,7 @@ const LoginForm = (props) => {
                             onChange={handleChange}
                             value={user.username}
                             innerRef={register({
-                                required: "please enter your account's email"
+                                required: "please enter your account's username"
                             })}
                         />
                         {errors.username && <p>{errors.username.message}</p>}

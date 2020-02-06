@@ -6,7 +6,7 @@ import { faHamburger, faUsers, faSignInAlt, faUserPlus, faSignOutAlt } from '@fo
 import Logout from '../Authentication/Logout'
 
 const Wrapper = styled.div`
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   height: 10vh;
   background-color: white;
