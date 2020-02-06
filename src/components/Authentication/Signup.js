@@ -37,7 +37,6 @@ const SignUpForm = (props) => {
         password: "",
         city: "",
     })
-
     const onSubmit = () => {
         console.log(newUser)
         axios
