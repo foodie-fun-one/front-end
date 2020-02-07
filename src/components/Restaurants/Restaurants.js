@@ -12,14 +12,20 @@ const Wrapper = styled.div`
 `
 
 export const Restaurants = () => {
-  const { restaurants, setRestaurants, reviews, setReviews } = useContext(RestrauntContext)
+  const { refresh, restaurants } = useContext(RestrauntContext)
   
-  const DeleteRestaurant = (id) => {
+  const DeleteRestaurant = (id, reviewID) => {
     axiosWithAuth().delete(`/api/restaurants/${id}`)
     .then(res => {
-      setRestaurants(restaurants.filter(item => item.id !== id))
+      console.log(res)
+      refresh()
     })
     .catch(err => console.log(err))
+
+    if(reviewID){
+    axiosWithAuth().delete(``)
+      
+    }
   }
   
   return(
@@ -27,7 +33,6 @@ export const Restaurants = () => {
     {restaurants.map((item) => <Restaurant 
     key={item.id} 
     restaurants={item} 
-    setRestaurants={setRestaurants} 
     DeleteRestaurant={DeleteRestaurant}
     />)}
   </Wrapper>

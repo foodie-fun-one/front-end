@@ -1,7 +1,15 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+
+} from 'reactstrap';
+
 import BeautyStars from 'beauty-stars';
 
 import { RestrauntContext } from '../../contexts/RestrauntContext'
@@ -17,14 +25,14 @@ const CardWrapper = styled.div`
   width: 100%;
   border: 1px solid gray;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   margin: 2% 0;
   padding: 1%;
   background-color: #e96c59;
   box-shadow: 4px 8px 3px #BB8378;
-  border-radius: 10px;
+  border-radius: 10px 0px 0px 10px;
 `
 
 const InfoWrapper = styled.div`
@@ -34,19 +42,14 @@ const InfoWrapper = styled.div`
 `
 
 const RatingsWrapper = styled.div`
-  width: 20%;
   width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const OptionsWrapper = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  z-index: 2;
-
-  &#optionsButton {
-    background-color: purple;
-  }
+  min-height: 200px;
 `
 
 const Rating = styled.div`
@@ -71,11 +74,13 @@ const Address = styled.div`
 `
 
 const Review = styled.div`
-  height: ;
+  display: flex;
+  align-items: center;
   width: 40%;
-  border: 1px solid gray;
+  border: 0px solid gray;
   margin: 0%;
-  min-height: 200px;
+  
+  font-size: 1.5rem;
 `
 
 const Button = styled.button`
@@ -83,60 +88,106 @@ const Button = styled.button`
   border: 1px solid black;
   padding: 25%;
   margin: 2% 10%;
-  
+  color: white;
+  background: #FF423BFF;
+  border: 2px solid #FF423BFF;
+  font-size: 1.1rem;
+  font-weight:500;
+  box-shadow: 3px 2px #FF423BFF;
   &:hover{
     text-decoration: underline;
   }
 `
 
-const DotWrapper = styled.div`
+const DotWrapper = styled.p`
   font-size: 1.5rem;
+  color: white;
+
+  &:focus{font-weight: bold;}
 `
 
+const No = styled.p`
+  text-align: center;
+
+  &: after{ 
+    content: " ❌"
+  }
+`
+const Yes = styled.p`
+  text-align: center;
+
+  &:after {
+    content: " ✅"
+  }
+`
 export const Restaurant = (props) => {
-  const { name, address, hours, id} = props.restaurants
-  const {findID} = useContext(RestrauntContext)
+  const { name, address, hours, id } = props.restaurants
+  const { findID, findReviewID, reviews } = useContext(RestrauntContext)
+
+  
+  const [review, setReview] = useState({
+    food_rating: 0,
+    price_rating: 0,
+    service_rating: 0,
+    review_disc: "Click on the add gray button to add a review to this restaurant",
+    eat_again: false
+  })
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen(prevState => !prevState);
-
+  
+  const [isReview, setIsReview] = useState(false)
   let button;
 
-  let defaultReviewMessage = "Click on the add review button to review the resteraunt"
+  if (isReview) {
+    button = <Link to = "/edit-review" onClick = {()=> {findReviewID(review.restaurant_id) }}> <Button>Edit Review</Button></Link >
+  } else {
+    button = <Link to="/add-review" onClick={() => {findID(id)}}><Button>Add Review</Button></Link>
+  }
+  
+  useEffect(() => {
+    if (reviews) {
+      reviews.forEach((el) => {
+        if (el.restaurant_id === id) {
+          setReview(el)
+          setIsReview(true)
+        }
+      })
+    }
+  }, [reviews])
 
   return (
     <Wrapper>
       <CardWrapper>
-      <InfoWrapper>
-        <Title>{name}</Title>
-        <Hours>Hours: {hours}</Hours>
-        <Address>{address}</Address>
-      </InfoWrapper>
+        <InfoWrapper>
+          <Title>{name}</Title>
+          <Hours>Hours: {hours}</Hours>
+          <Address>{address}</Address>
+        </InfoWrapper>
 
-      <RatingsWrapper>
-        <Rating>Food Rating:<BeautyStars value={5} edit={false} size={15} /></Rating>
-        <Rating>Price Rating:<BeautyStars value={3} edit={false} size={15} /></Rating>
-        <Rating>Service Rating:<BeautyStars value={1.5} edit={false} size={15} /></Rating>
-        <Rating>Overall Rating:<BeautyStars value={3.5} edit={false} size={15} /></Rating>
-      </RatingsWrapper>
+        <RatingsWrapper>
+          <Rating>Food Rating:<BeautyStars value={review.food_rating} edit={false} size={15} /></Rating>
+          <Rating>Price Rating:<BeautyStars value={review.price_rating} edit={false} size={15} /></Rating>
+          <Rating>Service Rating:<BeautyStars value={review.service_rating} edit={false} size={15} /></Rating>
+          {review.eat_again === false ? <No>Would Not eat there again</No> : review.eat_again === true ? <Yes>Would eat there again!</Yes> : null}
+        </RatingsWrapper>
 
-      <Review>{defaultReviewMessage}</Review>
+        <Review>{review.review_disc}</Review>
 
 
-      <OptionsWrapper>
-            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle id="optionsButton" tag="button">
-        <DotWrapper>...</DotWrapper>
-        </DropdownToggle>
-      <DropdownMenu>
-      <Link to="/edit-restaurant" onClick={()=>{findID(id)}}><DropdownItem>Edit Restaurant</DropdownItem></Link>
-        <DropdownItem onClick={()=> {props.DeleteRestaurant(id)}}>Delete Restaurant</DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-      </OptionsWrapper>
+        <OptionsWrapper>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+            <DropdownToggle id="optionsButton" tag="button">
+              <DotWrapper>...</DotWrapper>
+            </DropdownToggle>
+            <DropdownMenu>
+              <Link to="/edit-restaurant" onClick={() => { findID(id) }}><DropdownItem>Edit Restaurant</DropdownItem></Link>
+              <DropdownItem onClick={() => { props.DeleteRestaurant(id) }}>Delete Restaurant</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </OptionsWrapper>
       </CardWrapper>
-      <Link to="/edit-review" onClick={()=>{findID(1)}}><Button>Edit Review</Button></Link>
-      <Link to="/add-review"><Button onClick={()=>{findID(id)}}>Add Review</Button></Link>
+      {button}
     </Wrapper>
   )
 }

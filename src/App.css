@@ -26,16 +26,20 @@ h2 {
 p {
   font-size: 16px;
 }
-a {
-  border-bottom: 1px solid white;
-  color: #0076ff;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s ease;
+
+#optionsButton{
+  border: 0px;
+  margin: 0 25%;
+  padding: 0%;
+  display: flex;
+  background-color: #e96c59;
 }
-a:hover {
-  border-bottom: 1px solid #0076ff;
+
+#optionsButton:focus{
+  outline-color: #e96c59;
+  font-weight: bold;
 }
+
 code,
 pre {
   color: #d400ff;

@@ -10,12 +10,28 @@ const Wrapper = styled.div`
   margin: 0 auto;
   height: 10vh;
   background: #FFF6F4;
+  opacity: 90%;
   box-shadow: 0 3px 3px #56423e;
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+`
+
+const H1 = styled.h1`
+  color: black;
+  font-size: 3rem;
+  padding-left: 5%;
+  padding-top: 5%;
+
+  &:focus {outline-color: white;}
+`
+const HeadLink = styled(Link)`
+  display: flex;
+  align-items: center;
+
+  &:hover{text-decoration: none;}
 `
 
 const ButtonDiv = styled.div`
@@ -49,7 +65,7 @@ export const Navigation = () => {
 
   return (
     <Wrapper>
-      <Link to="/explore"><FontAwesomeIcon size="4x" color="black" icon={faHamburger} /></Link>
+      <HeadLink to="/explore"><FontAwesomeIcon size="4x" color="black" icon={faHamburger} /><H1 style={{ fontFamily: "Mogra" }}>FoodieFun</H1></HeadLink>
 
       <ButtonDiv>
 

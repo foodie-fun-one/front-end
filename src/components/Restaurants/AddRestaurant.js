@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { axiosWithAuth } from '../../Utils/AuthAxios'
 
+import history from '../../Utils/HIstory'
+
 import { RestrauntContext } from '../../contexts/RestrauntContext'
 const Wrapper = styled.div`
   width: 75%;
@@ -74,10 +76,9 @@ export const AddRestaurant = (props) => {
     axiosWithAuth().post("/api/restaurants", restaurant)
     .then(res => {
       console.log(res)
+      props.history.push('/explore')
     })
       .catch(err => console.log(err))
-    props.history.push('/explore')
-    refresh();
   }
   return (
     <Wrapper>
