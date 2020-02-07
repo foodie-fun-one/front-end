@@ -1,4 +1,6 @@
 .login-form {
+    min-width: 40vh;
+    max-width: 65vh;
     width: 40%;
     margin: 3rem auto;
     padding: 1.2rem 0;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { Restaurants } from './Restaurants'
 
+
 const Wrapper = styled.div`
   width: 75%;
   margin: 0 auto;
@@ -36,11 +37,12 @@ const AddButton = styled.button`
       color: #EDE9D0;
 `
 export const Dashboard = () => {
-  
-  return(
+
+  return (
     <Wrapper>
-      <h1 style={{ fontFamily: "Mogra"}}>Welcome to FoodieFun!</h1>
+      <h1 style={{ fontFamily: "Mogra" }}>Welcome to FoodieFun!</h1>
       <StyledLink to="/add-restaurant"><AddButton>Add Restaurant</AddButton></StyledLink>
       <Restaurants />
     </Wrapper>
-)}
+  )
+}
