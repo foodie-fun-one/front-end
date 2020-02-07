@@ -57,15 +57,14 @@ white-space: nowrap;
 `
 
 export const EditRestaurant = (props) => {
-  const {restrauntID, restaurants } = useContext(RestrauntContext);
+  const { refresh, fetchedID } = useContext(RestrauntContext);
 
-  let initialState = {
-    id: restrauntID,
+  const [editRestaurant, setEditRestaurant] = useState({
+    id: 0,
     name: "",
-    hours: "",
     address: "",
-  }
-  const [editRestaurant, setEditRestaurant] = useState(initialState)
+    hours: "",
+  })
 
   const handleChange = e => {
     setEditRestaurant({
@@ -75,33 +74,27 @@ export const EditRestaurant = (props) => {
   }
 
   useEffect(()=> {
-    axiosWithAuth().get(`/api/restaurants/${restrauntID}`)
+    axiosWithAuth().get(`/api/restaurants/${fetchedID}`)
     .then(res =>{
-      console.log(res)
-      return initialState = {
-        id: restrauntID,
+      setEditRestaurant({
+        id: fetchedID,
         name: res.data.name,
-        hours: res.data.hours,
         address: res.data.address,
-      }
-    }, [])
+        hours: res.data.hours,
+      })
+    })
     .catch(err => console.log(err))
-    console.log(initialState)
-  })
+    }, [])
 
   const onSubmit = e => {
     e.preventDefault();
-    axiosWithAuth().put(`/api/restaurants/${restrauntID}`, editRestaurant)
+    axiosWithAuth().put(`/api/restaurants/${fetchedID}`, editRestaurant)
     .then(res => {
-      console.log(restaurants)
-      console.log(editRestaurant)
+      console.log(res)
       props.history.push('/explore')
-      const edittedRestraunt = restaurants.map(el => el.id)
-      const indexOfChangedRestraunt = edittedRestraunt.indexOf(restrauntID)
-      // setRestaurants(...restaurants, restaurants[indexOfChangedRestraunt] = editRestaurant)
+      refresh();
     })
     .catch(err => console.log(err))
-    console.log(restaurants)
   }
   return (
     <Wrapper>
@@ -137,7 +130,6 @@ export const EditRestaurant = (props) => {
           />
           <Button>Change Restaurant</Button>
         </FormWrappers>
-
       </Form>
     </Wrapper>
   )

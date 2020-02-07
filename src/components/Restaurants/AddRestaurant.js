@@ -56,7 +56,7 @@ const Button = styled.button`
 `
 
 export const AddRestaurant = (props) => {
-  const { restaurants, setRestaurants } = useContext(RestrauntContext)
+  const { refresh } = useContext(RestrauntContext)
   const [restaurant, setRestaurant] = useState({
     name: "",
     hours: "",
@@ -73,12 +73,12 @@ export const AddRestaurant = (props) => {
   const onSubmit = () => {
     axiosWithAuth().post("/api/restaurants", restaurant)
     .then(res => {
-      setRestaurants(restaurants.concat(restaurant))
+      console.log(res)
     })
       .catch(err => console.log(err))
     props.history.push('/explore')
+    refresh();
   }
-  console.log(restaurants)
   return (
     <Wrapper>
       <Form onSubmit={onSubmit}>

@@ -98,6 +98,7 @@ margin: 0%;
 
 export const EditReview = () => {
   const { restrauntID } = useContext(RestrauntContext);
+  console.log(restrauntID)
   const [eat_again, setEat_Again] = useState(true)
 
   const [starRatings, setStarRatings] = useState({
@@ -110,28 +111,28 @@ export const EditReview = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axiosWithAuth().post(`/api/reviews/restaurant/${restrauntID}`, ({
-      user_id: parseInt(localStorage.getItem('ID')),
-      restaurant_id: restrauntID,
-      review_disc: review_disc,
-      price_rating: starRatings.price_rating,
-      service_rating: starRatings.service_rating,
-      food_rating: starRatings.food_rating,
-      eat_again: eat_again
-    }))
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
+    // axiosWithAuth().post(`/api/reviews/restaurant/${restrauntID}`, ({
+    //   user_id: parseInt(localStorage.getItem('ID')),
+    //   restaurant_id: restrauntID,
+    //   review_disc: review_disc,
+    //   price_rating: starRatings.price_rating,
+    //   service_rating: starRatings.service_rating,
+    //   food_rating: starRatings.food_rating,
+    //   eat_again: eat_again
+    // }))
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(err => console.log(err))
 
-    axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
-      .then(res => { console.log(res) })
-      .catch(err => console.log(err))
+    // axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
+    //   .then(res => { console.log(res) })
+    //   .catch(err => console.log(err))
   }
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-        <H1 style={{ fontFamily: "Mogra" }}>Edit Restaurant</H1>
+        <H1 style={{ fontFamily: "Mogra" }}>Edit Review</H1>
         <RatingWrapper>
           <Rating>Food Rating:<BeautyStars
             onChange={value => setStarRatings({ ...starRatings, food_rating: value })}

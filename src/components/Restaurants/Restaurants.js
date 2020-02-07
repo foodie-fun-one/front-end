@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `
 
 export const Restaurants = () => {
-  const { restaurants, setRestaurants } = useContext(RestrauntContext)
+  const { restaurants, setRestaurants, reviews, setReviews } = useContext(RestrauntContext)
   
   const DeleteRestaurant = (id) => {
     axiosWithAuth().delete(`/api/restaurants/${id}`)
