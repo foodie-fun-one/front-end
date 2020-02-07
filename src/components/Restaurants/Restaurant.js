@@ -135,7 +135,7 @@ export const Restaurant = (props) => {
     </Dropdown>
       </OptionsWrapper>
       </CardWrapper>
-      <Link to="/edit-review"><Button>Edit Review</Button></Link>
+      <Link to="/edit-review" onClick={()=>{findID(1)}}><Button>Edit Review</Button></Link>
       <Link to="/add-review"><Button onClick={()=>{findID(id)}}>Add Review</Button></Link>
     </Wrapper>
   )

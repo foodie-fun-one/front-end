@@ -53,10 +53,16 @@ white-space: nowrap;
     border: 2px solid #56423E;
     color: #EDE9D0;
 `
+
+const RatingWrapper = styled.div`
+width: 20.5%;
+margin: 0 auto;
+`
+
 const Rating = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: left;
   padding-bottom: 2%;
 `
@@ -90,7 +96,7 @@ padding: 0%;
 margin: 0%;
 `
 
-export const AddReview = () => {
+export const AddReview = (props) => {
   const { restrauntID } = useContext(RestrauntContext);
   const [eat_again, setEat_Again] = useState(true)
 
@@ -115,34 +121,37 @@ export const AddReview = () => {
     }))
       .then(res => {
         console.log(res)
+        props.history.push('/explore')
       })
       .catch(err => console.log(err))
 
-    axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
-      .then(res => { console.log(res) })
-      .catch(err => console.log(err))
+    // axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
+    //   .then(res => { console.log(res) })
+    //   .catch(err => console.log(err))
   }
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>
-      <H1 style={{ fontFamily: "Mogra"}}>Edit Restaurant</H1>
-        <Rating>Food Rating:<BeautyStars
-          onChange={value => setStarRatings({ ...starRatings, food_rating: value })}
-          value={starRatings.food_rating}
-          size={15} />
-        </Rating>
+        <H1 style={{ fontFamily: "Mogra" }}>Add Review</H1>
+        <RatingWrapper>
+          <Rating>Food Rating:<BeautyStars
+            onChange={value => setStarRatings({ ...starRatings, food_rating: value })}
+            value={starRatings.food_rating}
+            size={15} />
+          </Rating>
 
-        <Rating>Price Rating:<BeautyStars
-          onChange={value => setStarRatings({ ...starRatings, price_rating: value })}
-          value={starRatings.price_rating}
-          size={15} />
-        </Rating>
+          <Rating>Price Rating:<BeautyStars
+            onChange={value => setStarRatings({ ...starRatings, price_rating: value })}
+            value={starRatings.price_rating}
+            size={15} />
+          </Rating>
 
-        <Rating>Service Rating:<BeautyStars
-          onChange={value => setStarRatings({ ...starRatings, service_rating: value })}
-          value={starRatings.service_rating}
-          size={15} />
-        </Rating>
+          <Rating>Service Rating:<BeautyStars
+            onChange={value => setStarRatings({ ...starRatings, service_rating: value })}
+            value={starRatings.service_rating}
+            size={15} />
+          </Rating>
+        </RatingWrapper>
 
         <TextArea
           name="review"

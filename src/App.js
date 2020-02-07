@@ -29,29 +29,35 @@ const Wrapper = styled.div`
   height: 100vh;
 `
 function App() {
+  const [reseter, setReseter] = useState(true)
 
   const [restaurants, setRestaurants] = useState([]);
-  const [restrauntID, setRestrauntID] = useState(0)
+  const [reviews, setReviews] = useState([])
+  const [fetchedID, setFetchedID] = useState(0)
 
   useEffect(() => {
     axiosWithAuth().get("/api/restaurants")
       .then(res => { setRestaurants(res.data) })
       .catch(err => console.log(err))
 
-    axiosWithAuth().get(`/api/reviews/user/${restrauntID}`)
-      .then(res => {console.log(res)})
+    axiosWithAuth().get(`/api/reviews/user/${localStorage.getItem('ID')}`)
+      .then(res => {setReviews(res.data)})
       .catch(err => console.log(err))
-  }, [])
+  }, [reseter])
+
+  const refresh = () => {
+    setReseter(!reseter)
+  }
 
   const findID = (id) => {
-    setRestrauntID(id)
+    setFetchedID(id)
   }
 
 
   return (
     <Wrapper>
       <Router>
-        <RestrauntContext.Provider value={{ restaurants, setRestaurants, findID, restrauntID }}>
+        <RestrauntContext.Provider value={{ restaurants, setRestaurants, reviews, setReviews, findID, fetchedID , refresh }}>
           <Navigation />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
