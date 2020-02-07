@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import BeautyStars from 'beauty-stars';
 
 import styled from 'styled-components'
+
 import { axiosWithAuth } from '../../Utils/AuthAxios';
 
 import { RestrauntContext } from '../../contexts/RestrauntContext'
@@ -97,7 +98,7 @@ margin: 0%;
 `
 
 export const AddReview = (props) => {
-  const { restrauntID } = useContext(RestrauntContext);
+  const { fetchedID, refresh } = useContext(RestrauntContext);
   const [eat_again, setEat_Again] = useState(true)
 
   const [starRatings, setStarRatings] = useState({
@@ -110,9 +111,9 @@ export const AddReview = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axiosWithAuth().post(`/api/reviews/restaurant/${restrauntID}`, ({
+    axiosWithAuth().post(`/api/reviews/restaurant/${fetchedID}`, ({
       user_id: parseInt(localStorage.getItem('ID')),
-      restaurant_id: restrauntID,
+      restaurant_id: fetchedID,
       review_disc: review_disc,
       price_rating: starRatings.price_rating,
       service_rating: starRatings.service_rating,
@@ -122,13 +123,11 @@ export const AddReview = (props) => {
       .then(res => {
         console.log(res)
         props.history.push('/explore')
+        refresh()
       })
       .catch(err => console.log(err))
-
-    // axiosWithAuth().get(`/api/reviews/restaurant/${restrauntID}`)
-    //   .then(res => { console.log(res) })
-    //   .catch(err => console.log(err))
   }
+  console.log(fetchedID)
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit}>

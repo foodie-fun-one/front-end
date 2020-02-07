@@ -20,20 +20,19 @@ const AddButton = styled.button`
   padding: 1% 4%;
   margin-right: 2%;
   border-radius: 5px;
-  padding: 0.5rem 0;
   margin: 1rem auto;
-  color: #e34129;
-  background: #EDE9D0;
-  border: 2px solid #EDE9D0;
+  color: white;
+  background: #FF423BFF;
+  border: 2px solid #FF423BFF;
   font-size: 1.1rem;
   font-weight:500;
-  box-shadow: 3px 2px #56423E;
+  box-shadow: 3px 2px #FF423BFF;
   white-space: nowrap;
 
   &:hover{
-      background: #56423E;
-      box-shadow: 2px 1px #56423E;
-      border: 2px solid #56423E;
+      background: #FF241BFF;
+      box-shadow: 2px 1px #FF241BFF;
+      border: 2px solid #FF241BFF;
       color: #EDE9D0;
 `
 export const Dashboard = () => {

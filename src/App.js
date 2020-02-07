@@ -33,15 +33,17 @@ function App() {
 
   const [restaurants, setRestaurants] = useState([]);
   const [reviews, setReviews] = useState([])
-  const [fetchedID, setFetchedID] = useState(0)
+  const [fetchedID, setFetchedID] = useState("")
+  const [fetchedReviewID, setFetchedReviewID] = useState(0)
 
   useEffect(() => {
     axiosWithAuth().get("/api/restaurants")
       .then(res => { setRestaurants(res.data) })
       .catch(err => console.log(err))
 
-    axiosWithAuth().get(`/api/reviews/user/${localStorage.getItem('ID')}`)
-      .then(res => {setReviews(res.data)})
+    axiosWithAuth().get(`/api/reviews/combo/${localStorage.getItem('ID')}`)
+      .then(res => {
+        setReviews(res.data)})
       .catch(err => console.log(err))
   }, [reseter])
 
@@ -50,14 +52,22 @@ function App() {
   }
 
   const findID = (id) => {
+    if(id){
     setFetchedID(id)
+    }
   }
 
+  const findReviewID = (id) => {
+    if(id){
+      setFetchedReviewID(id)
+    }
+  }
+  console.log(fetchedID)
 
   return (
     <Wrapper>
       <Router>
-        <RestrauntContext.Provider value={{ restaurants, setRestaurants, reviews, setReviews, findID, fetchedID , refresh }}>
+        <RestrauntContext.Provider value={{ restaurants, setRestaurants, reviews, setReviews, findID, fetchedID , findReviewID, fetchedReviewID,  refresh }}>
           <Navigation />
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />

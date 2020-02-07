@@ -8,7 +8,10 @@ import {
     Label,
     Input,
     Col,
-    FormText
+    FormText,
+    Modal,
+    ModalBody,
+    Button,
 } from "reactstrap";
 import styled from "styled-components";
 import "./Login.css";
@@ -38,9 +41,13 @@ const LoginForm = (props) => {
         username: "",
         password: ""
     })
-    const { register, handleSubmit, errors } = useForm();
 
-    const onSubmit = () => {
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
+    const { register, handleSubmit, errors, reset } = useForm();
+
+    const onSubmit = (data, e) => {
         axios
             .post("https://foodiefun-buildweek.herokuapp.com/api/login", user)
             .then(res => {
@@ -50,9 +57,10 @@ const LoginForm = (props) => {
                 window.location.reload(false)
             })
             .catch(err => {
-                console.log("Login error occured", err)
+                toggle();
             })
-    };
+            resetForm();
+        };
 
     const handleChange = e => {
         setUser({
@@ -60,6 +68,14 @@ const LoginForm = (props) => {
             [e.target.name]: e.target.value,
         })
     }
+
+    const resetForm = () => {
+    setUser({
+        username: "",
+        password: "",
+    })
+    }
+    
     return (
         <div className="login-form-container">
             <Form className="login-form" onSubmit={handleSubmit(onSubmit)}>
@@ -112,6 +128,11 @@ const LoginForm = (props) => {
                     </div>
                 </Col>
             </Form>
+            {/* Model */}
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalBody>Incorrect username/password</ModalBody>
+                <Button color="warning" onClick={toggle}>Retry</Button>
+            </Modal>
         </div>
     )
 }
