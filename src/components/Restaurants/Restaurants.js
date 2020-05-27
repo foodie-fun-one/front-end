@@ -18,14 +18,18 @@ export const Restaurants = () => {
     axiosWithAuth().delete(`/api/restaurants/${id}`)
     .then(res => {
       console.log(res)
-      refresh()
     })
     .catch(err => console.log(err))
 
+    console.log(reviewID)
     if(reviewID){
-    axiosWithAuth().delete(``)
-      
+    axiosWithAuth().delete(`/api/reviews/${reviewID}`)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
     }
+    refresh()
   }
   
   return(

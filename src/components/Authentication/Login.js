@@ -45,7 +45,7 @@ const LoginForm = (props) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
-    const { register, handleSubmit, errors, reset } = useForm();
+    const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = (data, e) => {
         axios
@@ -59,7 +59,7 @@ const LoginForm = (props) => {
             .catch(err => {
                 toggle();
             })
-            resetForm();
+            setUser({username: "", password: ""})
         };
 
     const handleChange = e => {
@@ -67,13 +67,6 @@ const LoginForm = (props) => {
             ...user,
             [e.target.name]: e.target.value,
         })
-    }
-
-    const resetForm = () => {
-    setUser({
-        username: "",
-        password: "",
-    })
     }
     
     return (

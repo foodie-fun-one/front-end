@@ -32,7 +32,7 @@ const CardWrapper = styled.div`
   padding: 1%;
   background-color: #e96c59;
   box-shadow: 4px 8px 3px #BB8378;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 10px 10px 10px;
 `
 
 const InfoWrapper = styled.div`
@@ -53,11 +53,11 @@ const OptionsWrapper = styled.div`
 `
 
 const Rating = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
-  padding-bottom: 2%;
+
+`
+
+const ReviewText = styled.p`
+
 `
 
 const Title = styled.div`
@@ -74,13 +74,9 @@ const Address = styled.div`
 `
 
 const Review = styled.div`
-  display: flex;
-  align-items: center;
-  width: 40%;
-  border: 0px solid gray;
-  margin: 0%;
-  
-  font-size: 1.5rem;
+  vertical-align:top;
+  display:inline-block;
+  width: 30%;
 `
 
 const Button = styled.button`
@@ -122,7 +118,7 @@ const Yes = styled.p`
 `
 export const Restaurant = (props) => {
   const { name, address, hours, id } = props.restaurants
-  const { findID, findReviewID, reviews } = useContext(RestrauntContext)
+  const { findID, findReviewID, reviews, fetchedReviewID } = useContext(RestrauntContext)
 
   
   const [review, setReview] = useState({
@@ -154,7 +150,7 @@ export const Restaurant = (props) => {
         }
       })
     }
-  }, [reviews])
+  }, [reviews, id])
 
   return (
     <Wrapper>
@@ -172,7 +168,7 @@ export const Restaurant = (props) => {
           {review.eat_again === false ? <No>Would Not eat there again</No> : review.eat_again === true ? <Yes>Would eat there again!</Yes> : null}
         </RatingsWrapper>
 
-        <Review>{review.review_disc}</Review>
+        <Review><ReviewText>{review.review_disc}</ReviewText></Review>
 
 
         <OptionsWrapper>
@@ -182,7 +178,12 @@ export const Restaurant = (props) => {
             </DropdownToggle>
             <DropdownMenu>
               <Link to="/edit-restaurant" onClick={() => { findID(id) }}><DropdownItem>Edit Restaurant</DropdownItem></Link>
-              <DropdownItem onClick={() => { props.DeleteRestaurant(id) }}>Delete Restaurant</DropdownItem>
+              <DropdownItem 
+              onClick={() => {
+                findReviewID(review.restaurant_id) 
+                if(fetchedReviewID){props.DeleteRestaurant(id)}
+                }}>Delete Restaurant
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </OptionsWrapper>

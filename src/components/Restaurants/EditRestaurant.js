@@ -84,7 +84,7 @@ export const EditRestaurant = (props) => {
       })
     })
     .catch(err => console.log(err))
-    }, [])
+    }, [fetchedID])
 
   const onSubmit = e => {
     e.preventDefault();

@@ -49,6 +49,7 @@ function App() {
 
   const refresh = () => {
     setReseter(!reseter)
+    setReseter(!reseter)
   }
 
   const findID = (id) => {
@@ -62,7 +63,6 @@ function App() {
       setFetchedReviewID(id)
     }
   }
-  console.log(fetchedID)
 
   return (
     <Wrapper>
