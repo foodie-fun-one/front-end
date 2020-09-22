@@ -18,9 +18,9 @@ Full CRUD functionality on restaurants.
 Individually kept reviews on each individual restaurant.
 
 ## Installation
-Clone the repo to your local machine
-Install NPM
-npm start
+Clone the repo to your local machine\
+Install NPM\
+npm start\
 
 ## API Reference
 https://github.com/foodie-fun-one/Back-End
