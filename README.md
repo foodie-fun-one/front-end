@@ -1,12 +1,27 @@
-Folder Structure 
+## Foodie Fun
+Foodie fun is an application designed for food lovers who want to try and rate different local restaurants. 
 
-Components:
-Authentication -- Login, Logout, Signup
-Navigation -- Navigation, PrivateRoute
-Restaurants -- AddRestaurant, Restaurants, Restaurant, editRestaurant
-Reviews -- AddReview, Reviews, Review, editReview
+## Motivation
+This project was created by foodies who find themselves getting stuck in the rythme of eating at the same few places over and over.
+akashnimare/foco?branch=master&svg=true)](https://ci.appveyor.com/project/akashnimare/foco/branch/master)
 
-Utils
-authAxios
+## Screenshots
+Include logo/demo screenshot etc.
 
-Packages Installed
+## Tech/framework used
+<b>Built with</b>
+- [React](https://reactjs.org/)
+- [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react)
+- [React Starts](https://www.npmjs.com/package/react-stars)
+
+## Features
+Full CRUD functionality on restaurants.
+Individually kept reviews on each individual restaurant.
+
+## Installation
+> Clone the repo to your local machine
+> Install NPM
+> npm start
+
+## API Reference
+https://github.com/foodie-fun-one/Back-End
