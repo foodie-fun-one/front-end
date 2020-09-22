@@ -4,9 +4,6 @@ Foodie fun is an application designed for food lovers who want to try and rate d
 ## Motivation
 This project was created by foodies who find themselves getting stuck in the rythme of eating at the same few places over and over.
 
-## Screenshots
-(https://cdn.discordapp.com/attachments/719668430495547402/758093207681761330/unknown.png)
-
 ## Tech/framework used
 <b>Built with</b>
 - [React](https://reactjs.org/)
