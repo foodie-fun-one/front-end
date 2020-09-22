@@ -3,7 +3,6 @@ Foodie fun is an application designed for food lovers who want to try and rate d
 
 ## Motivation
 This project was created by foodies who find themselves getting stuck in the rythme of eating at the same few places over and over.
-akashnimare/foco?branch=master&svg=true)](https://ci.appveyor.com/project/akashnimare/foco/branch/master)
 
 ## Screenshots
 Include logo/demo screenshot etc.
@@ -19,9 +18,9 @@ Full CRUD functionality on restaurants.
 Individually kept reviews on each individual restaurant.
 
 ## Installation
-> Clone the repo to your local machine
-> Install NPM
-> npm start
+Clone the repo to your local machine
+Install NPM
+npm start
 
 ## API Reference
 https://github.com/foodie-fun-one/Back-End
